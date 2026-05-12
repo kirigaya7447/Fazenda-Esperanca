@@ -21,11 +21,31 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    cadastrarFuncionario();
+                    System.out.println("Digite o nome do colaborador:");
+                    String nomeColaborador = sc.nextLine();
+                    System.out.println("Digite o nome do colaborador:");
+                    int matricula = sc.nextInt();
+                    System.out.println("Digite o tipo de contrato do colaborador:");
+                    String tipoContrato = sc.nextLine();
+
+                    if(CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato)){
+                        System.out.println("Cadastro efetuado com sucesso!");
+                    }
+                    else{
+                        System.out.println("Falha no cadastro, este colaborador já existe!");
+                    }
                     break;
 
                 case 2:
-                    cadastrarTalhao();
+                    System.out.println("Digite o nome da área:");
+                    String nomeTalhao = sc.nextLine();
+                    System.out.println("Digite a variedade do café:");
+                    String variedadeCafe = sc.nextLine();
+                    System.out.println("Digite a estimativa de produção:");
+                    Double estimativaProducao = sc.nextDouble();
+
+
+                    CadastroTalhao.cadastrarTalhao(nomeTalhao, variedadeCafe, estimativaProducao);
                     break;
 
                 case 3:
