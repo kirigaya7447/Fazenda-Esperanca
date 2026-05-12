@@ -3,6 +3,7 @@ public class App {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         int opcao;
+        CadastroColaborador colaboradores = new CadastroColaborador();
         do {
             System.out.println("----> SISTEMA FAZENDA <----");
             System.out.println("1 - Cadastrar Funcionário");
@@ -23,12 +24,14 @@ public class App {
                 case 1:
                     System.out.println("Digite o nome do colaborador:");
                     String nomeColaborador = sc.nextLine();
-                    System.out.println("Digite o nome do colaborador:");
+                    System.out.println("Digite a matrícula do colaborador:");
                     int matricula = sc.nextInt();
                     System.out.println("Digite o tipo de contrato do colaborador:");
                     String tipoContrato = sc.nextLine();
 
-                    if(CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato)){
+                     colaboradores = new CadastroColaborador();
+
+                    if(CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato, colaboradores)){
                         System.out.println("Cadastro efetuado com sucesso!");
                     }
                     else{

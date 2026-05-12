@@ -3,13 +3,12 @@ public class CadastroColaborador {
     public int matricula;
     public String tipoContrato;
 
-    public static boolean cadastrarColaborador(String nome, int matricula, String tipoContrato){
+    public static boolean cadastrarColaborador(String nome, int matricula, String tipoContrato, CadastroColaborador colaboradores){
         boolean cadastroEfetuado = false;
-        CadastroColaborador colaborador = new CadastroColaborador();
         
-        colaborador.nome = nome;
-        colaborador.matricula = matricula;
-        colaborador.tipoContrato = tipoContrato;
+        colaboradores.nome = nome;
+        colaboradores.matricula = matricula;
+        colaboradores.tipoContrato = tipoContrato;
         
         return cadastroEfetuado;
     }
