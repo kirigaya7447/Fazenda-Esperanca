@@ -18,7 +18,6 @@ public class App {
 
             opcao = sc.nextInt();
             sc.nextLine();
-            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -28,8 +27,6 @@ public class App {
                     int matricula = sc.nextInt();
                     System.out.println("Digite o tipo de contrato do colaborador:");
                     String tipoContrato = sc.nextLine();
-
-                     colaboradores = new CadastroColaborador();
 
                     if(CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato, colaboradores)){
                         System.out.println("Cadastro efetuado com sucesso!");
