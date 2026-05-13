@@ -5,9 +5,12 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         int opcao;
-        CadastroColaborador colaboradores = new CadastroColaborador();
-        CadastroTalhao talhoes = new CadastroTalhao();
-        CadastroFrota tratores = new CadastroFrota();
+        int totalColaboradores = 0;
+        int totalTalhoes = 0;
+        int totalTratores = 0;
+        CadastroColaborador[] colaboradores = new CadastroColaborador[10];
+        CadastroTalhao[] talhoes = new CadastroTalhao[10];
+        CadastroFrota[] tratores = new CadastroFrota[10];
 
         do {
             System.out.println("----> SISTEMA FAZENDA <----");
@@ -26,63 +29,62 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o nome do colaborador:");
-                    String nomeColaborador = sc.nextLine();
-                    System.out.println("Digite a matrícula do colaborador:");
-                    int matricula = sc.nextInt();
-                    System.out.println("Digite o tipo de contrato do colaborador:");
-                    String tipoContrato = sc.nextLine();
+                    System.out.println("----> Cadastro de Colaborador <----");
+                    colaboradores[totalColaboradores] = new CadastroColaborador();
 
-                    if (CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato,
-                            colaboradores)) {
-                        System.out.println("Cadastro efetuado com sucesso!");
-                    } else {
-                        System.out.println("Falha no cadastro, este colaborador já existe!");
-                    }
+                    System.out.println("Digite o nome do colaborador:");
+                    colaboradores[totalColaboradores].nome = sc.nextLine();
+                    System.out.println("Digite a matrícula do colaborador:");
+                    colaboradores[totalColaboradores].matricula = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Digite o tipo de contrato do colaborador:");
+                    colaboradores[totalColaboradores].tipoContrato = sc.nextLine();
+
+                    System.out.println("Cadastro efetuado com sucesso!");
                     break;
 
                 case 2:
-                    System.out.println("Digite o nome da área:");
-                    String nomeTalhao = sc.nextLine();
-                    System.out.println("Digite a variedade do café:");
-                    String variedadeCafe = sc.nextLine();
-                    System.out.println("Digite a estimativa de produção:");
-                    Double estimativaProducao = sc.nextDouble();
+            System.out.println("----> Cadastro de Talhão <----");
+            talhoes[totalTalhoes] = new CadastroTalhao();
 
-                    if (CadastroTalhao.cadastrarTalhao(nomeTalhao, variedadeCafe, estimativaProducao, talhoes)) {
-                        System.out.println("Cadastro efetuado com sucesso!");
-                    } else {
-                        System.out.println("Falha no cadastro, este talhão já existe!");
-                    }
+                    System.out.println("Digite o nome da área:");
+                    talhoes[totalTalhoes].nome = sc.nextLine();
+                    System.out.println("Digite a variedade do café:");
+                    talhoes[totalTalhoes].variedadeCafe = sc.nextLine();
+                    System.out.println("Digite a estimativa de produção:");
+                    talhoes[totalTalhoes].estimativaProducao = sc.nextDouble();
+
+                    System.out.println("Cadastro efetuado com sucesso!");
+                    totalTalhoes++;
                     break;
 
                 case 3:
-                    System.out.println("Digite a placa do trator:");
-                    String placa = sc.nextLine();
-                    System.out.println("Digite a capacidade máxima:");
-                    double capacidadeMaxima = sc.nextDouble();
+            System.out.println("----> Cadastro de Frota <----");
+            tratores[totalTratores] = new CadastroFrota();
 
-                    if (CadastroFrota.cadastrarFrota(placa, capacidadeMaxima, tratores)) {
-                        System.out.println("Cadastro efetuado com sucesso!");
-                    } else {
-                        System.out.println("Falha no cadastro, este trator já existe!");
-                    }
+                    System.out.println("Digite a placa do trator:");
+                    tratores[totalTratores].placa = sc.nextLine();
+                    System.out.println("Digite a capacidade máxima:");
+                    tratores[totalTratores].capacidadeMaxima = sc.nextDouble();
+
+                   System.out.println("Cadastro efetuado com sucesso!");
+                   totalTratores++;
                     break;
 
                 case 4:
-                    registrarCafe();
+                    //registrarCafe();
                     break;
 
                 case 5:
-                    relatorioQuinzena();
+                    //relatorioQuinzena();
                     break;
 
                 case 6:
-                    relatorioTalhao();
+                    //relatorioTalhao();
                     break;
 
                 case 7:
-                    relatorioSecagem();
+                    //relatorioSecagem();
                     break;
 
                 case 0:
