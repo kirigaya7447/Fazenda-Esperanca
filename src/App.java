@@ -1,9 +1,14 @@
 import java.util.Scanner;
+
 public class App {
     static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) throws Exception {
         int opcao;
         CadastroColaborador colaboradores = new CadastroColaborador();
+        CadastroTalhao talhoes = new CadastroTalhao();
+        CadastroFrota tratores = new CadastroFrota();
+
         do {
             System.out.println("----> SISTEMA FAZENDA <----");
             System.out.println("1 - Cadastrar Funcionário");
@@ -28,10 +33,10 @@ public class App {
                     System.out.println("Digite o tipo de contrato do colaborador:");
                     String tipoContrato = sc.nextLine();
 
-                    if(CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato, colaboradores)){
+                    if (CadastroColaborador.cadastrarColaborador(nomeColaborador, matricula, tipoContrato,
+                            colaboradores)) {
                         System.out.println("Cadastro efetuado com sucesso!");
-                    }
-                    else{
+                    } else {
                         System.out.println("Falha no cadastro, este colaborador já existe!");
                     }
                     break;
@@ -44,12 +49,24 @@ public class App {
                     System.out.println("Digite a estimativa de produção:");
                     Double estimativaProducao = sc.nextDouble();
 
-
-                    CadastroTalhao.cadastrarTalhao(nomeTalhao, variedadeCafe, estimativaProducao);
+                    if (CadastroTalhao.cadastrarTalhao(nomeTalhao, variedadeCafe, estimativaProducao, talhoes)) {
+                        System.out.println("Cadastro efetuado com sucesso!");
+                    } else {
+                        System.out.println("Falha no cadastro, este talhão já existe!");
+                    }
                     break;
 
                 case 3:
-                    cadastrarTrator();
+                    System.out.println("Digite a placa do trator:");
+                    String placa = sc.nextLine();
+                    System.out.println("Digite a capacidade máxima:");
+                    double capacidadeMaxima = sc.nextDouble();
+
+                    if (CadastroFrota.cadastrarFrota(placa, capacidadeMaxima, tratores)) {
+                        System.out.println("Cadastro efetuado com sucesso!");
+                    } else {
+                        System.out.println("Falha no cadastro, este trator já existe!");
+                    }
                     break;
 
                 case 4:
@@ -71,12 +88,10 @@ public class App {
                 case 0:
                     System.out.println("Sistema encerrado.");
                     break;
-
                 default:
                     System.out.println("Opção inválida!");
             }
 
         } while (opcao != 0);
-    }
     }
 }

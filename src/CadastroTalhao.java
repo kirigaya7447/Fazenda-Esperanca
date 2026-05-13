@@ -3,13 +3,12 @@ public class CadastroTalhao {
     public String variedadeCafe;
     public double estimativaProducao;
 
-    public static boolean cadastrarTalhao(String nome, String variedadeCafe, double estimativaProducao){
+    public static boolean cadastrarTalhao(String nome, String variedadeCafe, double estimativaProducao, CadastroTalhao talhoes){
         boolean cadastroEfetuado = false;
-        CadastroTalhao talhao = new CadastroTalhao();
 
-        talhao.nome = nome;
-        talhao.variedadeCafe = variedadeCafe;
-        talhao.estimativaProducao = estimativaProducao;
+        talhoes.nome = nome;
+        talhoes.variedadeCafe = variedadeCafe;
+        talhoes.estimativaProducao = estimativaProducao;
         return cadastroEfetuado;
     }
 }
