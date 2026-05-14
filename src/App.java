@@ -9,18 +9,17 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         int opcao;
-        int totalColaboradores = 0;
-        int totalTalhoes = 0;
-        int totalTratores = 0;
-        CadastroColaborador[] colaboradores = new CadastroColaborador[10];
-        CadastroTalhao[] talhoes = new CadastroTalhao[10];
-        CadastroFrota[] tratores = new CadastroFrota[10];
+
+        CadastroColaborador[] colaboradores = new CadastroColaborador[100];
+        CadastroTalhao[] talhoes = new CadastroTalhao[100];
+        CadastroFrota[] tratores = new CadastroFrota[100];
+        RegistroCafe[] registros = new RegistroCafe[100];
 
         
-        totalColaboradores = carregarFuncionarios(colaboradores);
-        totalTalhoes = carregarTalhao(talhoes);
-        totalTratores = carregarFrota(tratores);
-        totalTalhoes = carregarTalhao(talhoes);
+        int totalColaboradores = carregarFuncionarios(colaboradores);
+        int totalTalhoes = carregarTalhao(talhoes);
+        int totalTratores = carregarFrota(tratores);
+        int totalRegistros = carregartalhoesCafe(registros);
 
         do {
             System.out.println("----> SISTEMA FAZENDA <----");
@@ -41,13 +40,14 @@ public class App {
                 case 1:
                     System.out.println("----> Cadastro de Colaborador <----");
                     colaboradores[totalColaboradores] = new CadastroColaborador();
+                    
+                    System.out.println("Digite a matrícula do colaborador:");
+                    colaboradores[totalColaboradores].matricula = sc.nextInt();
+                    sc.nextLine();
 
                     System.out.println("Digite o nome do colaborador:");
                     colaboradores[totalColaboradores].nome = sc.nextLine();
 
-                    System.out.println("Digite a matrícula do colaborador:");
-                    colaboradores[totalColaboradores].matricula = sc.nextInt();
-                    sc.nextLine();
 
                     System.out.println("Digite o tipo de contrato do colaborador:");
                     colaboradores[totalColaboradores].tipoContrato = sc.nextLine();
@@ -61,8 +61,8 @@ public class App {
 
                         for (int i = 0; i < totalColaboradores; i++) {
                             // converte o objeto para o formato CSV
-                            String linha = colaboradores[i].nome + "; " +
-                                    colaboradores[i].matricula + "; " +
+                            String linha = colaboradores[i].nome + ";" +
+                                    colaboradores[i].matricula + ";" +
                                     colaboradores[i].tipoContrato;
                             gravador.println(linha);
                             System.out.println("Sistema atualizado com sucesso!");
@@ -137,7 +137,92 @@ public class App {
                     break;
 
                 case 4:
-                    //registrarCafe();
+                    System.out.println("\n----> Registro de Entrada de Café <----");
+                    RegistroCafe novoRegistro = new RegistroCafe();
+
+                    System.out.print("Matrícula do Funcionário: ");
+                    int mat = sc.nextInt();
+                    sc.nextLine();
+
+                    boolean funcExiste = false;
+
+                    for (int i = 0; i < totalColaboradores; i++) {
+                        if (colaboradores[i].matricula == mat) {
+                            funcExiste = true;
+                            break;
+                        }
+                    }
+                    if (!funcExiste) {
+                        System.out.println("ERRO: Funcionário não cadastrado!");
+                        break;
+                    }
+                    System.out.print("Nome do Talhão: ");
+                    String nomeT = sc.nextLine();
+                    boolean talhaoExiste = false;
+
+                    for (int i = 0; i < totalTalhoes; i++) {
+                        if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
+                            talhaoExiste = true;
+                            break;
+                        }
+                    }
+                    if (!talhaoExiste) {
+                        System.out.println("ERRO: Talhão não encontrado!");
+                        break;
+                    }
+                    System.out.print("Placa do Trator: ");
+                    String placaT = sc.nextLine();
+                    int indexTrator = -1;
+
+                    for (int i = 0; i < totalTratores; i++) {
+                        if (tratores[i].placa.equalsIgnoreCase(placaT)) {
+                            indexTrator = i;
+                            break;
+                        }
+                    }
+                    if (indexTrator == -1) {
+                        System.out.println("ERRO: Trator não existe!");
+                        break;
+                    }
+                    System.out.print("Quantidade de Litros: ");
+                    double litros = sc.nextDouble();
+                    sc.nextLine();
+
+                    if (litros > tratores[indexTrator].capacidadeMaxima) {
+                        System.out.println("ERRO: Carga maior que a capacidade do trator!");
+                        break;
+                    }
+
+                    System.out.print("Data (dd/mm): ");
+                    novoRegistro.data = sc.nextLine();
+
+                    System.out.print("Destino (Terreiro/Secador): ");
+                    novoRegistro.destino = sc.nextLine();
+
+                    novoRegistro.matriculaFuncionario = mat;
+                    novoRegistro.nomeTalhao = nomeT;
+                    novoRegistro.placaTrator = placaT;
+                    novoRegistro.quantidadeLitros = litros;
+
+                    registros[totalRegistros] = novoRegistro;
+                    totalRegistros++;
+                    System.out.println("Lançamento realizado com sucesso!");
+                    try {
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/RegistrosCafe.csv");
+                        PrintWriter gravador = new PrintWriter(arquivo);
+
+                        for (int cont = 0; cont < totalRegistros; cont++) {
+                            String linha = registros[cont].matriculaFuncionario + ";" +
+                                    registros[cont].nomeTalhao + ";" +
+                                    registros[cont].placaTrator + ";" +
+                                    registros[cont].quantidadeLitros;
+                            gravador.println(linha);
+                            System.out.println("Sistema atualizado com sucesso!");
+                        }
+                        gravador.close();
+                    } catch (IOException err) {
+                        System.out.println("Erro ao salvar: " + err.getMessage());
+                    }
                     break;
 
                 case 5:
@@ -166,7 +251,7 @@ public class App {
         int cont = 0;
 
         try {
-            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/talhoesCafe.csv"));
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/RegistrosCafe.csv"));
             while (leituraArquivo.hasNextLine() && cont < talhoes.length) {
                 String linha = leituraArquivo.nextLine();
                 String[] separador = linha.split(";");
@@ -186,12 +271,47 @@ public class App {
     }
 
     public static int carregarFuncionarios(CadastroColaborador[] funcionarios) {
-        int cont = 0;
-        return cont;
+        int a = 0;
+
+        try {
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Funcionarios.csv")); // verificar se
+                                                                                                 // o local do
+                                                                                                 // arq ta certo
+            while (leituraArquivo.hasNextLine() && a < funcionarios.length) {
+                String linha = leituraArquivo.nextLine();
+                String[] separador = linha.split(";");
+                funcionarios[a] = new CadastroColaborador();
+                funcionarios[a].matricula = Integer.valueOf(separador[0]);
+                funcionarios[a].nome = separador[1];
+                funcionarios[a].tipoContrato = separador[2];
+                a++;
+            }
+            leituraArquivo.close();
+        } catch (IOException err) {
+            System.err.println("Erro encontrado na leitura do arquivo: " + err);
+        }
+        return a;
     }
 
     public static int carregarFrota(CadastroFrota[] tratores) {
         int cont = 0;
+
+        try {
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Frota.csv"));
+            while (leituraArquivo.hasNextLine() && cont < tratores.length) {
+                String linha = leituraArquivo.nextLine();
+                String[] separador = linha.split(";");
+                tratores[cont] = new CadastroFrota();
+                tratores[cont].placa = separador[0];
+                tratores[cont].capacidadeMaxima = Double.valueOf(separador[1]);
+                cont++;
+            }
+
+            leituraArquivo.close();
+        } catch (IOException err) {
+            System.err.println("Erro encontrado na leitura do arquivo: " + err);
+        }
+
         return cont;
     }
 
