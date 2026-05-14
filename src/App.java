@@ -39,14 +39,15 @@ public class App {
 
                     System.out.println("Digite o nome do colaborador:");
                     colaboradores[totalColaboradores].nome = sc.nextLine();
+
                     System.out.println("Digite a matrícula do colaborador:");
                     colaboradores[totalColaboradores].matricula = sc.nextInt();
                     sc.nextLine();
+
                     System.out.println("Digite o tipo de contrato do colaborador:");
                     colaboradores[totalColaboradores].tipoContrato = sc.nextLine();
 
                     System.out.println("Cadastro efetuado com sucesso!");
-
                     totalColaboradores++;
 
                     try {
@@ -76,43 +77,36 @@ public class App {
                     System.out.println("Digite o código do talhão:");
                     talhoes[totalTalhoes].codigo = sc.nextInt();
                     sc.nextLine();
+
                     System.out.println("Digite o nome da área:");
                     talhoes[totalTalhoes].nome = sc.nextLine();
+
                     System.out.println("Digite a variedade do café:");
                     talhoes[totalTalhoes].variedadeCafe = sc.nextLine();
+
                     System.out.println("Digite a estimativa de produção:");
                     talhoes[totalTalhoes].estimativaProducao = sc.nextDouble();
 
                     System.out.println("Cadastro efetuado com sucesso!");
                     totalTalhoes++;
 
-                    //salvando informações
+                    // salvando informações
                     try {
-
                         FileWriter arquivo = new FileWriter("src/BancoDeDados/Talhoes.csv");
-
                         PrintWriter gravar = new PrintWriter(arquivo);
 
-                        for(int i = 0; i < totalTalhoes; i++) {
-
-                            gravar.println( 
-                                talhoes[i].codigo + ";" +
-                                talhoes[i].nome + ";" +
-                                talhoes[i].variedadeCafe + ";" +
-                                talhoes[i].estimativaProducao
-                            );
-
+                        for (int i = 0; i < totalTalhoes; i++) {
+                            gravar.println(
+                                    talhoes[i].codigo + ";" +
+                                            talhoes[i].nome + ";" +
+                                            talhoes[i].variedadeCafe + ";" +
+                                            talhoes[i].estimativaProducao);
                         }
-
                         gravar.close();
                         arquivo.close();
-
-                    } catch(Exception erro) {
-
+                    } catch (Exception erro) {
                         System.out.println("Erro ao gravar arquivo");
-
                     }
-
                     break;
 
                 case 3:
@@ -121,6 +115,7 @@ public class App {
 
                     System.out.println("Digite a placa do trator:");
                     tratores[totalTratores].placa = sc.nextLine();
+
                     System.out.println("Digite a capacidade máxima:");
                     tratores[totalTratores].capacidadeMaxima = sc.nextDouble();
 
@@ -133,15 +128,16 @@ public class App {
 
                         for (int i = 0; i < totalTratores; i++) {
                             String linha = tratores[i].placa + "; " +
-                                           tratores[i].capacidadeMaxima;
-                            gravador.println(linha);
-                             System.out.println("Sistema atualizado com sucesso!");
-                        }
-                          gravador.close();
-                       } catch (Exception e) {
-                          System.out.println("Erro ao salvar: " + e.getMessage());
-                    }
+                                    tratores[i].capacidadeMaxima;
 
+                            gravador.println(linha);
+
+                            System.out.println("Sistema atualizado com sucesso!");
+                        }
+                        gravador.close();
+                    } catch (Exception e) {
+                        System.out.println("Erro ao salvar: " + e.getMessage());
+                    }
                     break;
 
                 case 4:
@@ -151,7 +147,9 @@ public class App {
                     System.out.print("Matrícula do Funcionário: ");
                     int mat = sc.nextInt();
                     sc.nextLine();
+
                     boolean funcExiste = false;
+
                     for (int i = 0; i < totalColaboradores; i++) {
                         if (colaboradores[i].matricula == mat) {
                             funcExiste = true;
@@ -162,10 +160,10 @@ public class App {
                         System.out.println("ERRO: Funcionário não cadastrado!");
                         break;
                     }
-
                     System.out.print("Nome do Talhão: ");
                     String nomeT = sc.nextLine();
                     boolean talhaoExiste = false;
+
                     for (int i = 0; i < totalTalhoes; i++) {
                         if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
                             talhaoExiste = true;
@@ -176,22 +174,20 @@ public class App {
                         System.out.println("ERRO: Talhão não encontrado!");
                         break;
                     }
-
                     System.out.print("Placa do Trator: ");
                     String placaT = sc.nextLine();
                     int indexTrator = -1;
+
                     for (int i = 0; i < totalTratores; i++) {
                         if (tratores[i].placa.equalsIgnoreCase(placaT)) {
                             indexTrator = i;
                             break;
                         }
                     }
-
                     if (indexTrator == -1) {
                         System.out.println("ERRO: Trator não existe!");
                         break;
                     }
-
                     System.out.print("Quantidade de Litros: ");
                     double litros = sc.nextDouble();
                     sc.nextLine();
@@ -203,6 +199,7 @@ public class App {
 
                     System.out.print("Data (dd/mm): ");
                     novoRegistro.data = sc.nextLine();
+
                     System.out.print("Destino (Terreiro/Secador): ");
                     novoRegistro.destino = sc.nextLine();
 
@@ -214,19 +211,17 @@ public class App {
                     registros[totalRegistros] = novoRegistro;
                     totalRegistros++;
                     System.out.println("Lançamento realizado com sucesso!");
-
                     try {
                         FileWriter arquivo = new FileWriter("src/BancoDeDados/RegistrosCafe.csv");
                         PrintWriter gravador = new PrintWriter(arquivo);
 
                         for (int cont = 0; cont < totalRegistros; cont++) {
                             String linha = registros[cont].matriculaFuncionario + ";" +
-                                            registros[cont].nomeTalhao + ";" +
-                                            registros[cont].placaTrator + ";" +
-                                            registros[cont].quantidadeLitros;
+                                    registros[cont].nomeTalhao + ";" +
+                                    registros[cont].placaTrator + ";" +
+                                    registros[cont].quantidadeLitros;
                             gravador.println(linha);
                             System.out.println("Sistema atualizado com sucesso!");
-
                         }
                         gravador.close();
                     } catch (IOException err) {
