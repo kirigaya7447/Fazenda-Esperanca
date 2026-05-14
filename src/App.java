@@ -61,8 +61,8 @@ public class App {
 
                         for (int i = 0; i < totalColaboradores; i++) {
                             // converte o objeto para o formato CSV
-                            String linha = colaboradores[i].nome + ";" +
-                                    colaboradores[i].matricula + ";" +
+                            String linha = colaboradores[i].matricula + ";" +
+                            colaboradores[i].nome + ";" +
                                     colaboradores[i].tipoContrato;
                             gravador.println(linha);
                             System.out.println("Sistema atualizado com sucesso!");
