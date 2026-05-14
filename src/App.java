@@ -85,6 +85,34 @@ public class App {
 
                     System.out.println("Cadastro efetuado com sucesso!");
                     totalTalhoes++;
+
+                    //salvando informações
+                    try {
+
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Talhoes.csv");
+
+                        PrintWriter gravar = new PrintWriter(arquivo);
+
+                        for(int i = 0; i < totalTalhoes; i++) {
+
+                            gravar.println( 
+                                talhoes[i].codigo + ";" +
+                                talhoes[i].nome + ";" +
+                                talhoes[i].variedadeCafe + ";" +
+                                talhoes[i].estimativaProducao
+                            );
+
+                        }
+
+                        gravar.close();
+                        arquivo.close();
+
+                    } catch(Exception erro) {
+
+                        System.out.println("Erro ao gravar arquivo");
+
+                    }
+
                     break;
 
                 case 3:
