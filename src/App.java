@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
@@ -45,6 +47,25 @@ public class App {
                     System.out.println("Cadastro efetuado com sucesso!");
 
                     totalColaboradores++;
+
+                    try {
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Funcionarios.csv");
+                        PrintWriter gravador = new PrintWriter(arquivo);
+
+                        for (int i = 0; i < totalColaboradores; i++) {
+                            // converte o objeto para o formato CSV
+                            String linha = colaboradores[i].nome + "; " +
+                                    colaboradores[i].matricula + "; " +
+                                    colaboradores[i].tipoContrato;
+                            gravador.println(linha);
+                            System.out.println("Sistema atualizado com sucesso!");
+
+                        }
+                        gravador.close();
+                    } catch (Exception e) {
+                        System.out.println("Erro ao salvar: " + e.getMessage());
+                    }
+
                     break;
 
                 case 2:
@@ -87,79 +108,79 @@ public class App {
                     sc.nextLine();
                     boolean funcExiste = false;
                     for (int i = 0; i < totalColaboradores; i++) {
-                    if (colaboradores[i].matricula == mat) {
-                    funcExiste = true;
-                    break;
+                        if (colaboradores[i].matricula == mat) {
+                            funcExiste = true;
+                            break;
+                        }
                     }
-                }
-                if (!funcExiste) {
-                System.out.println("ERRO: Funcionário não cadastrado!");
-                break;
-                }
+                    if (!funcExiste) {
+                        System.out.println("ERRO: Funcionário não cadastrado!");
+                        break;
+                    }
 
-                System.out.print("Nome do Talhão: ");
-                String nomeT = sc.nextLine();
-                boolean talhaoExiste = false;
-                for (int i = 0; i < totalTalhoes; i++) {
-                if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
-                talhaoExiste = true;
-                break;
-                }
-            }
-            if (!talhaoExiste) {
-            System.out.println("ERRO: Talhão não encontrado!");
-            break;
-            }
+                    System.out.print("Nome do Talhão: ");
+                    String nomeT = sc.nextLine();
+                    boolean talhaoExiste = false;
+                    for (int i = 0; i < totalTalhoes; i++) {
+                        if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
+                            talhaoExiste = true;
+                            break;
+                        }
+                    }
+                    if (!talhaoExiste) {
+                        System.out.println("ERRO: Talhão não encontrado!");
+                        break;
+                    }
 
-            System.out.print("Placa do Trator: ");
-            String placaT = sc.nextLine();
-            int indexTrator = -1;
-            for (int i = 0; i < totalTratores; i++) {
-            if (tratores[i].placa.equalsIgnoreCase(placaT)) {
-            indexTrator = i;
-            break;
-            }
-        }
+                    System.out.print("Placa do Trator: ");
+                    String placaT = sc.nextLine();
+                    int indexTrator = -1;
+                    for (int i = 0; i < totalTratores; i++) {
+                        if (tratores[i].placa.equalsIgnoreCase(placaT)) {
+                            indexTrator = i;
+                            break;
+                        }
+                    }
 
-        if (indexTrator == -1) {
-        System.out.println("ERRO: Trator não existe!");
-        break;
-        }
+                    if (indexTrator == -1) {
+                        System.out.println("ERRO: Trator não existe!");
+                        break;
+                    }
 
-        System.out.print("Quantidade de Litros: ");
-        double litros = sc.nextDouble();
-        sc.nextLine();
+                    System.out.print("Quantidade de Litros: ");
+                    double litros = sc.nextDouble();
+                    sc.nextLine();
 
-        if (litros > tratores[indexTrator].capacidadeMaxima) {
-        System.out.println("ERRO: Carga maior que a capacidade do trator!");
-        break;
-        }
+                    if (litros > tratores[indexTrator].capacidadeMaxima) {
+                        System.out.println("ERRO: Carga maior que a capacidade do trator!");
+                        break;
+                    }
 
-        System.out.print("Data (dd/mm): ");
-        novoRegistro.data = sc.nextLine();
-        System.out.print("Destino (Terreiro/Secador): ");
-        novoRegistro.destino = sc.nextLine();
-    
-        novoRegistro.matriculaFuncionario = mat;
-        novoRegistro.nomeTalhao = nomeT;
-        novoRegistro.placaTrator = placaT;
-        novoRegistro.quantidadeLitros = litros;
+                    System.out.print("Data (dd/mm): ");
+                    novoRegistro.data = sc.nextLine();
+                    System.out.print("Destino (Terreiro/Secador): ");
+                    novoRegistro.destino = sc.nextLine();
 
-        registros[totalRegistros] = novoRegistro;
-        totalRegistros++;
-        System.out.println("Lançamento realizado com sucesso!");
-        break;
+                    novoRegistro.matriculaFuncionario = mat;
+                    novoRegistro.nomeTalhao = nomeT;
+                    novoRegistro.placaTrator = placaT;
+                    novoRegistro.quantidadeLitros = litros;
+
+                    registros[totalRegistros] = novoRegistro;
+                    totalRegistros++;
+                    System.out.println("Lançamento realizado com sucesso!");
+                    break;
 
                 case 5:
-                    //relatorioQuinzena();
+                    // relatorioQuinzena();
                     break;
 
                 case 6:
-                    //relatorioTalhao();
+                    // relatorioTalhao();
                     break;
 
                 case 7:
-                    //relatorioSecagem();
+                    // relatorioSecagem();
                     break;
 
                 case 0:
