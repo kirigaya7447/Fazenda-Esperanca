@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.IOException;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
@@ -97,6 +98,22 @@ public class App {
 
                     System.out.println("Cadastro efetuado com sucesso!");
                     totalTratores++;
+
+                    try {
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Frota.csv");
+                        PrintWriter gravador = new PrintWriter(arquivo);
+
+                        for (int i = 0; i < totalTratores; i++) {
+                            String linha = tratores[i].placa + "; " +
+                                           tratores[i].capacidadeMaxima;
+                            gravador.println(linha);
+                             System.out.println("Sistema atualizado com sucesso!");
+                        }
+                          gravador.close();
+                       } catch (Exception e) {
+                          System.out.println("Erro ao salvar: " + e.getMessage());
+                    }
+
                     break;
 
                 case 4:
@@ -169,6 +186,24 @@ public class App {
                     registros[totalRegistros] = novoRegistro;
                     totalRegistros++;
                     System.out.println("Lançamento realizado com sucesso!");
+
+                    try {
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/RegistrosCafe.csv");
+                        PrintWriter gravador = new PrintWriter(arquivo);
+
+                        for (int cont = 0; cont < totalRegistros; cont++) {
+                            String linha = registros[cont].matriculaFuncionario + ";" +
+                                            registros[cont].nomeTalhao + ";" +
+                                            registros[cont].placaTrator + ";" +
+                                            registros[cont].quantidadeLitros;
+                            gravador.println(linha);
+                            System.out.println("Sistema atualizado com sucesso!");
+
+                        }
+                        gravador.close();
+                    } catch (IOException err) {
+                        System.out.println("Erro ao salvar: " + err.getMessage());
+                    }
                     break;
 
                 case 5:
