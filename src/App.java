@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -7,15 +8,17 @@ public class App {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        int totalRegistros = 0;
+        
         RegistroCafe[] registros = new RegistroCafe[100]; // Espaço para os lançamentos
-        int opcao;
-        int totalColaboradores = 0;
-        int totalTalhoes = 0;
-        int totalTratores = 0;
         CadastroColaborador[] colaboradores = new CadastroColaborador[10];
         CadastroTalhao[] talhoes = new CadastroTalhao[10];
         CadastroFrota[] tratores = new CadastroFrota[10];
+
+        int opcao;
+        int totalColaboradores = carregarFuncionarios(colaboradores);
+        int totalTalhoes = carregarTalhao(talhoes);
+        int totalTratores = carregarFrota(tratores);
+        int totalRegistros = carregarRegistrosCafe(registros);
 
         do {
             System.out.println("\n----> SISTEMA FAZENDA <----");
@@ -250,4 +253,45 @@ public class App {
 
         } while (opcao != 0);
     }
+
+    public static int carregarRegistrosCafe(RegistroCafe[] registros) {
+        int cont = 0;
+
+        try {
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/RegistrosCafe.csv"));
+            while (leituraArquivo.hasNextLine() && cont < registros.length) {
+                String linha = leituraArquivo.nextLine();
+                String[] separador = linha.split(";");
+                registros[cont] = new RegistroCafe();
+                registros[cont].matriculaFuncionario = Integer.valueOf(separador[0]);
+                registros[cont].nomeTalhao = separador[1];
+                registros[cont].placaTrator = separador[2];
+                registros[cont].quantidadeLitros = Double.valueOf(separador[3]);
+                cont++;
+            }
+
+            leituraArquivo.close();
+        } catch (IOException err) {
+            System.err.println("Erro encontrado na leitura do arquivo: " + err);
+        }
+        return cont;
+    }
+
+    public static int carregarFuncionarios(CadastroColaborador[] funcionarios) {
+        int cont = 0;
+        return cont;
+    }
+
+    public static int carregarFrota(CadastroFrota[] tratores) {
+        int cont = 0;
+        return cont;
+    }
+
+    public static int carregarTalhao(CadastroTalhao[] talhoes) {
+        int cont = 0;
+        return cont;
+    }
+
+    
+
 }
