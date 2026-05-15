@@ -10,13 +10,13 @@ public class App {
     public static void main(String[] args) throws Exception {
         int opcao;
 
-        CadastroColaborador[] colaboradores = new CadastroColaborador[100];
+        CadastroFuncionario[] funcionarios = new CadastroFuncionario[100];
         CadastroTalhao[] talhoes = new CadastroTalhao[100];
         CadastroFrota[] tratores = new CadastroFrota[100];
         RegistroCafe[] registros = new RegistroCafe[100];
 
         
-        int totalColaboradores = carregarFuncionarios(colaboradores);
+        int totalFuncionarios = carregarFuncionarios(funcionarios);
         int totalTalhoes = carregarTalhao(talhoes);
         int totalTratores = carregarFrota(tratores);
         int totalRegistros = carregartalhoesCafe(registros);
@@ -38,32 +38,32 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("----> Cadastro de Colaborador <----");
-                    colaboradores[totalColaboradores] = new CadastroColaborador();
+                    System.out.println("----> Cadastro de Funcionário <----");
+                    funcionarios[totalFuncionarios] = new CadastroFuncionario();
                     
-                    System.out.println("Digite a matrícula do colaborador:");
-                    colaboradores[totalColaboradores].matricula = sc.nextInt();
+                    System.out.println("Digite a matrícula do funcionário:");
+                    funcionarios[totalFuncionarios].matricula = sc.nextInt();
                     sc.nextLine();
 
-                    System.out.println("Digite o nome do colaborador:");
-                    colaboradores[totalColaboradores].nome = sc.nextLine();
+                    System.out.println("Digite o nome do funcionário:");
+                    funcionarios[totalFuncionarios].nome = sc.nextLine();
 
 
-                    System.out.println("Digite o tipo de contrato do colaborador:");
-                    colaboradores[totalColaboradores].tipoContrato = sc.nextLine();
+                    System.out.println("Digite o tipo de contrato do funcionário:");
+                    funcionarios[totalFuncionarios].tipoContrato = sc.nextLine();
 
                     System.out.println("Cadastro efetuado com sucesso!");
-                    totalColaboradores++;
+                    totalFuncionarios++;
 
                     try {
                         FileWriter arquivo = new FileWriter("src/BancoDeDados/Funcionarios.csv");
                         PrintWriter gravador = new PrintWriter(arquivo);
 
-                        for (int i = 0; i < totalColaboradores; i++) {
+                        for (int i = 0; i < totalFuncionarios; i++) {
                             // converte o objeto para o formato CSV
-                            String linha = colaboradores[i].matricula + ";" +
-                            colaboradores[i].nome + ";" +
-                                    colaboradores[i].tipoContrato;
+                            String linha = funcionarios[i].matricula + ";" +
+                            funcionarios[i].nome + ";" +
+                                    funcionarios[i].tipoContrato;
                             gravador.println(linha);
                             System.out.println("Sistema atualizado com sucesso!");
 
@@ -146,8 +146,8 @@ public class App {
 
                     boolean funcExiste = false;
 
-                    for (int i = 0; i < totalColaboradores; i++) {
-                        if (colaboradores[i].matricula == mat) {
+                    for (int i = 0; i < totalFuncionarios; i++) {
+                        if (funcionarios[i].matricula == mat) {
                             funcExiste = true;
                             break;
                         }
@@ -270,17 +270,17 @@ public class App {
         return cont;
     }
 
-    public static int carregarFuncionarios(CadastroColaborador[] funcionarios) {
+    public static int carregarFuncionarios(CadastroFuncionario[] funcionarios) {
         int a = 0;
 
         try {
-            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Funcionarios.csv")); // verificar se
-                                                                                                 // o local do
-                                                                                                 // arq ta certo
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Funcionarios.csv"));
+                                                                                                 
+                                                                                                 
             while (leituraArquivo.hasNextLine() && a < funcionarios.length) {
                 String linha = leituraArquivo.nextLine();
                 String[] separador = linha.split(";");
-                funcionarios[a] = new CadastroColaborador();
+                funcionarios[a] = new CadastroFuncionario();
                 funcionarios[a].matricula = Integer.valueOf(separador[0]);
                 funcionarios[a].nome = separador[1];
                 funcionarios[a].tipoContrato = separador[2];
