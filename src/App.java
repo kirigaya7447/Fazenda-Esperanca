@@ -134,6 +134,24 @@ public class App {
 
                    System.out.println("Cadastro efetuado com sucesso!");
                    totalTratores++;
+
+                   try {
+                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Frota.csv");
+                        PrintWriter gravador = new PrintWriter(arquivo);
+
+                        for (int i = 0; i < totalTratores; i++) {
+                            // converte o objeto para o formato CSV
+                            String linha = tratores[i].placa + ";" +
+                            tratores[i].capacidadeMaxima;
+                            gravador.println(linha);
+                            System.out.println("Sistema atualizado com sucesso!");
+
+                        }
+                        gravador.close();
+                    } catch (Exception e) {
+                        System.out.println("Erro ao salvar: " + e.getMessage());
+                    }
+
                     break;
 
                 case 4:
