@@ -1,5 +1,39 @@
 public class Relatorios {
 
+    //Relatório 1 - Acerto da Quinzena
+    public static void relatorioQuinzena(
+            CadastroFuncionario[] funcionarios,
+            int totalFuncionarios,
+            RegistroCafe[] registros,
+            int totalRegistros) {
+
+        System.out.println("\n----> RELATÓRIO DA QUINZENA <----");
+
+        //percorre todos os funcionários
+        for (int i = 0; i < totalFuncionarios; i++) {
+
+            double totalLitros = 0;
+
+            //percorre todos os registros
+            for (int j = 0; j < totalRegistros; j++) {
+
+                //verifica se o registro pertence ao funcionário
+                if (registros[j].matriculaFuncionario ==
+                        funcionarios[i].matricula) {
+
+                    totalLitros += registros[j].quantidadeLitros;
+                }
+            }
+
+            //mostra resultado do funcionário
+            System.out.println("Funcionário: " + funcionarios[i].nome);
+            System.out.println("Matrícula: " + funcionarios[i].matricula);
+            System.out.println("Total Colhido: " + totalLitros + " litros");
+            System.out.println("-----------------------------------");
+        }
+    }
+    
+    //Relatório 2- Talhão
     public static void relatorioTalhao(
         CadastroTalhao[] talhoes,
         int totalTalhoes,
@@ -46,5 +80,34 @@ public class Relatorios {
         }
 
     }
+    //Relatório 3 - Secagem
+    public static void relatorioSecagem(
+           RegistroCafe[] registros,
+           int totalRegistros) {
+
+           double totalSecador = 0;
+           double totalTerreiro = 0;
+
+           System.out.println("\n----> RELATÓRIO DE SECAGEM <----");
+
+           //percorre todos os registros
+           for (int i = 0; i < totalRegistros; i++) {
+
+           //verifica o destino
+           if (registros[i].destino.equalsIgnoreCase("Secador")) {
+
+           totalSecador += registros[i].quantidadeLitros;
+
+           } else if (registros[i].destino.equalsIgnoreCase("Terreiro")) {
+
+           totalTerreiro += registros[i].quantidadeLitros;
+           }
+        }
+
+        //exibe os resultados
+        System.out.println("Total enviado para o Secador: " + totalSecador + " litros");
+        System.out.println("Total enviado para o Terreiro: " + totalTerreiro + " litros");
+        System.out.println("-----------------------------------");
+}
 
 }

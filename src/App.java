@@ -245,6 +245,8 @@ public class App {
 
                 case 5:
                     // relatorioQuinzena();
+                    Relatorios.relatorioQuinzena(funcionarios,totalFuncionarios,registros,totalRegistros);
+                    
                     break;
 
                 case 6:
@@ -255,6 +257,8 @@ public class App {
 
                 case 7:
                     // relatorioSecagem();
+                    Relatorios.relatorioSecagem(registros,totalRegistros);
+
                     break;
 
                 case 0:
