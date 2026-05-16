@@ -249,7 +249,9 @@ public class App {
 
                 case 6:
                     // relatorioTalhao();
-                    break;
+                     Relatorios.relatorioTalhao(talhoes,totalTalhoes,registros,totalRegistros);
+                    
+                     break;
 
                 case 7:
                     // relatorioSecagem();
