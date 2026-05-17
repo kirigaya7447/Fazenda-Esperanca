@@ -280,8 +280,6 @@ public class App {
     public static int cadastrarRegistrosCafe(int mat, String nomeT, String placaT, double litros, String data, String destino, int totalRegistros, RegistroCafe[] registros){
                     RegistroCafe novoRegistro = new RegistroCafe();
 
-                    
-
                     novoRegistro.matriculaFuncionario = mat;
                     novoRegistro.nomeTalhao = nomeT;
                     novoRegistro.placaTrator = placaT;
@@ -300,7 +298,9 @@ public class App {
                             String linha = registros[cont].matriculaFuncionario + ";" +
                                     registros[cont].nomeTalhao + ";" +
                                     registros[cont].placaTrator + ";" +
-                                    registros[cont].quantidadeLitros;
+                                    registros[cont].quantidadeLitros + ";" +
+                                    registros[cont].data + ";" +
+                                    registros[cont].destino;
                             gravador.println(linha);
                             System.out.println("Sistema atualizado com sucesso!");
                         }
@@ -313,30 +313,7 @@ public class App {
     }
 
     //FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
-
-    public static int carregartalhoesCafe(RegistroCafe[] talhoes) {
-        int cont = 0;
-
-        try {
-            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/RegistrosCafe.csv"));
-            while (leituraArquivo.hasNextLine() && cont < talhoes.length) {
-                String linha = leituraArquivo.nextLine();
-                String[] separador = linha.split(";");
-                talhoes[cont] = new RegistroCafe();
-                talhoes[cont].matriculaFuncionario = Integer.valueOf(separador[0]);
-                talhoes[cont].nomeTalhao = separador[1];
-                talhoes[cont].placaTrator = separador[2];
-                talhoes[cont].quantidadeLitros = Double.valueOf(separador[3]);
-                cont++;
-            }
-
-            leituraArquivo.close();
-        } catch (IOException err) {
-            System.err.println("Erro encontrado na leitura do arquivo: " + err);
-        }
-        return cont;
-    }
-
+    
     public static int carregarFuncionarios(CadastroFuncionario[] funcionarios) {
         int a = 0;
 
@@ -358,28 +335,6 @@ public class App {
             System.err.println("Erro encontrado na leitura do arquivo: " + err);
         }
         return a;
-    }
-
-    public static int carregarFrota(CadastroFrota[] tratores) {
-        int cont = 0;
-
-        try {
-            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Frota.csv"));
-            while (leituraArquivo.hasNextLine() && cont < tratores.length) {
-                String linha = leituraArquivo.nextLine();
-                String[] separador = linha.split(";");
-                tratores[cont] = new CadastroFrota();
-                tratores[cont].placa = separador[0];
-                tratores[cont].capacidadeMaxima = Double.valueOf(separador[1]);
-                cont++;
-            }
-
-            leituraArquivo.close();
-        } catch (IOException err) {
-            System.err.println("Erro encontrado na leitura do arquivo: " + err);
-        }
-
-        return cont;
     }
 
     public static int carregarTalhao(CadastroTalhao[] talhoes) {
@@ -405,6 +360,50 @@ public class App {
         return cont;
     }
 
-    
+    public static int carregarFrota(CadastroFrota[] tratores) {
+        int cont = 0;
 
+        try {
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Frota.csv"));
+            while (leituraArquivo.hasNextLine() && cont < tratores.length) {
+                String linha = leituraArquivo.nextLine();
+                String[] separador = linha.split(";");
+                tratores[cont] = new CadastroFrota();
+                tratores[cont].placa = separador[0];
+                tratores[cont].capacidadeMaxima = Double.valueOf(separador[1]);
+                cont++;
+            }
+
+            leituraArquivo.close();
+        } catch (IOException err) {
+            System.err.println("Erro encontrado na leitura do arquivo: " + err);
+        }
+
+        return cont;
+    }
+
+    public static int carregartalhoesCafe(RegistroCafe[] talhoes) {
+        int cont = 0;
+
+        try {
+            Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/RegistrosCafe.csv"));
+            while (leituraArquivo.hasNextLine() && cont < talhoes.length) {
+                String linha = leituraArquivo.nextLine();
+                String[] separador = linha.split(";");
+                talhoes[cont] = new RegistroCafe();
+                talhoes[cont].matriculaFuncionario = Integer.valueOf(separador[0]);
+                talhoes[cont].nomeTalhao = separador[1];
+                talhoes[cont].placaTrator = separador[2];
+                talhoes[cont].quantidadeLitros = Double.valueOf(separador[3]);
+                talhoes[cont].data = separador[4];
+                talhoes[cont].destino = separador[5];
+                cont++;
+            }
+
+            leituraArquivo.close();
+        } catch (IOException err) {
+            System.err.println("Erro encontrado na leitura do arquivo: " + err);
+        }
+        return cont;
+    }
 }
