@@ -1,4 +1,21 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Relatorios {
+
+//Registra a hora e a data do relatório
+    private static void mostrarDataEHora(){
+        LocalDateTime horaAtual = LocalDateTime.now();
+
+        DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formataHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        String data = horaAtual.format(formataData);
+        String hora = horaAtual.format(formataHora);
+
+
+        System.out.println("Relatório extraído em: " + data + " às " + hora);
+    }
 
     //Relatório 1 - Acerto da Quinzena
     public static void relatorioQuinzena(
@@ -26,6 +43,7 @@ public class Relatorios {
             }
 
             //mostra resultado do funcionário
+            mostrarDataEHora();
             System.out.println("Funcionário: " + funcionarios[i].nome);
             System.out.println("Matrícula: " + funcionarios[i].matricula);
             System.out.println("Total Colhido: " + totalLitros + " litros");
@@ -58,6 +76,7 @@ public class Relatorios {
             }
 
             System.out.println();
+            mostrarDataEHora();
 
             System.out.println("Talhão: " + talhoes[i].nome);
 
@@ -105,6 +124,7 @@ public class Relatorios {
         }
 
         //exibe os resultados
+        mostrarDataEHora();
         System.out.println("Total enviado para o Secador: " + totalSecador + " litros");
         System.out.println("Total enviado para o Terreiro: " + totalTerreiro + " litros");
         System.out.println("-----------------------------------");

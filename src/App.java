@@ -147,21 +147,15 @@ public class App {
                     break;
 
                 case 5:
-                    // relatorioQuinzena();
                     Relatorios.relatorioQuinzena(funcionarios,totalFuncionarios,registros,totalRegistros);
-                    
                     break;
 
                 case 6:
-                    // relatorioTalhao();
                      Relatorios.relatorioTalhao(talhoes,totalTalhoes,registros,totalRegistros);
-                    
                      break;
 
                 case 7:
-                    // relatorioSecagem();
                     Relatorios.relatorioSecagem(registros,totalRegistros);
-
                     break;
 
                 case 0:
@@ -313,7 +307,7 @@ public class App {
     }
 
     //FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
-    
+
     public static int carregarFuncionarios(CadastroFuncionario[] funcionarios) {
         int a = 0;
 
