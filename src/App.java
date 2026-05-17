@@ -39,18 +39,88 @@ public class App {
             switch (opcao) {
                 case 1:
                     System.out.println("----> Cadastro de Funcionário <----");
-                    funcionarios[totalFuncionarios] = new CadastroFuncionario();
-                    
-                    System.out.println("Digite a matrícula do funcionário:");
-                    funcionarios[totalFuncionarios].matricula = sc.nextInt();
+                    System.out.println("Digite a matrícula do funcionário(Formato 000):");
+                    int matricula = sc.nextInt();
                     sc.nextLine();
 
                     System.out.println("Digite o nome do funcionário:");
-                    funcionarios[totalFuncionarios].nome = sc.nextLine();
+                    String nomeFuncionario = sc.nextLine();
 
 
-                    System.out.println("Digite o tipo de contrato do funcionário:");
-                    funcionarios[totalFuncionarios].tipoContrato = sc.nextLine();
+                    System.out.println("Digite o tipo de contrato do funcionário(Diarista ou Fixo):");
+                    String tipoContrato = sc.nextLine();
+
+                    totalFuncionarios =  cadastrarFuncionario(matricula, nomeFuncionario, tipoContrato, totalFuncionarios, funcionarios);
+                    break;
+
+                case 2:
+                    System.out.println("----> Cadastro de Talhão <----");
+                    System.out.println("Digite o código do talhão(000):");
+                    int codigoTalhao = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println("Digite o nome da área:");
+                    String nomeTalhao = sc.nextLine();
+
+                    System.out.println("Digite a variedade do café:");
+                    String variedade = sc.nextLine();
+
+                    System.out.println("Digite a estimativa de produção:");
+                    double estimativa = sc.nextDouble();
+                    totalTalhoes = cadastrarTalhao(codigoTalhao, nomeTalhao, variedade, estimativa, totalTalhoes, talhoes);
+                    break;
+
+                case 3:
+                    System.out.println("----> Cadastro de Frota <----");
+                    System.out.println("Digite a placa do trator(Formato AAA-0000):");
+                    String placa = sc.nextLine();
+
+                    System.out.println("Digite a capacidade máxima:");
+                    Double capacidadeMaxima = sc.nextDouble();
+
+                    totalTratores = cadastrarFrota(placa, capacidadeMaxima, totalTratores, tratores);
+                    break;
+
+                case 4:
+                    
+                    break;
+
+                case 5:
+                    // relatorioQuinzena();
+                    Relatorios.relatorioQuinzena(funcionarios,totalFuncionarios,registros,totalRegistros);
+                    
+                    break;
+
+                case 6:
+                    // relatorioTalhao();
+                     Relatorios.relatorioTalhao(talhoes,totalTalhoes,registros,totalRegistros);
+                    
+                     break;
+
+                case 7:
+                    // relatorioSecagem();
+                    Relatorios.relatorioSecagem(registros,totalRegistros);
+
+                    break;
+
+                case 0:
+                    System.out.println("Sistema encerrado.");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+
+        } while (opcao != 0);
+    }
+
+    //FUNÇÕES DOS CADASTROS
+
+    public static int cadastrarFuncionario(int matricula, String nome, String tipoContrato, int totalFuncionarios, CadastroFuncionario[] funcionarios){
+                    funcionarios[totalFuncionarios] = new CadastroFuncionario();
+                    
+                    funcionarios[totalFuncionarios].matricula = matricula;
+                    funcionarios[totalFuncionarios].nome = nome;
+                    funcionarios[totalFuncionarios].tipoContrato = tipoContrato;
 
                     System.out.println("Cadastro efetuado com sucesso!");
                     totalFuncionarios++;
@@ -73,22 +143,16 @@ public class App {
                         System.out.println("Erro ao salvar: " + e.getMessage());
                     }
 
-                    break;
+                    return totalFuncionarios;
+    }
 
-                case 2:
-            System.out.println("----> Cadastro de Talhão <----");
+    public static int cadastrarTalhao(int codigo, String nome, String variedade, double estimativa, int totalTalhoes, CadastroTalhao[] talhoes){
             talhoes[totalTalhoes] = new CadastroTalhao();
 
-                    System.out.println("Digite o nome da área:");
-                    talhoes[totalTalhoes].nome = sc.nextLine();
-
-                    System.out.println("Digite a variedade do café:");
-                    talhoes[totalTalhoes].variedadeCafe = sc.nextLine();
-
-                    System.out.println("Digite a estimativa de produção:");
-                    talhoes[totalTalhoes].estimativaProducao = sc.nextDouble();
-                    System.out.println("Digite o código do talhão:");
-                    talhoes[totalTalhoes].codigo = sc.nextInt();
+                    talhoes[totalTalhoes].codigo = codigo;
+                    talhoes[totalTalhoes].nome = nome;
+                    talhoes[totalTalhoes].variedadeCafe = variedade;
+                    talhoes[totalTalhoes].estimativaProducao = estimativa;
 
                     System.out.println("Cadastro efetuado com sucesso!");
                     totalTalhoes++;
@@ -119,18 +183,16 @@ public class App {
                         System.out.println("Erro ao gravar arquivo");
 
                     }
+                    return totalTalhoes;
 
-                    break;
+    }
 
-                case 3:
-            System.out.println("----> Cadastro de Frota <----");
+    public static int cadastrarFrota(String placa, double capacidadeMaxima, int totalTratores, CadastroFrota[] tratores){
             tratores[totalTratores] = new CadastroFrota();
 
-                    System.out.println("Digite a placa do trator:");
-                    tratores[totalTratores].placa = sc.nextLine();
+                    tratores[totalTratores].placa = placa;
 
-                    System.out.println("Digite a capacidade máxima:");
-                    tratores[totalTratores].capacidadeMaxima = sc.nextDouble();
+                    tratores[totalTratores].capacidadeMaxima = capacidadeMaxima;
 
                    System.out.println("Cadastro efetuado com sucesso!");
                    totalTratores++;
@@ -151,11 +213,11 @@ public class App {
                     } catch (Exception e) {
                         System.out.println("Erro ao salvar: " + e.getMessage());
                     }
+                    return totalTratores;
+    }
 
-                    break;
-
-                case 4:
-                    System.out.println("\n----> Registro de Entrada de Café <----");
+    public static void cadastrarRegistrosCafe(){
+        System.out.println("\n----> Registro de Entrada de Café <----");
                     RegistroCafe novoRegistro = new RegistroCafe();
 
                     System.out.print("Matrícula do Funcionário: ");
@@ -241,35 +303,9 @@ public class App {
                     } catch (IOException err) {
                         System.out.println("Erro ao salvar: " + err.getMessage());
                     }
-                    break;
-
-                case 5:
-                    // relatorioQuinzena();
-                    Relatorios.relatorioQuinzena(funcionarios,totalFuncionarios,registros,totalRegistros);
-                    
-                    break;
-
-                case 6:
-                    // relatorioTalhao();
-                     Relatorios.relatorioTalhao(talhoes,totalTalhoes,registros,totalRegistros);
-                    
-                     break;
-
-                case 7:
-                    // relatorioSecagem();
-                    Relatorios.relatorioSecagem(registros,totalRegistros);
-
-                    break;
-
-                case 0:
-                    System.out.println("Sistema encerrado.");
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-            }
-
-        } while (opcao != 0);
     }
+
+    //FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
 
     public static int carregartalhoesCafe(RegistroCafe[] talhoes) {
         int cont = 0;
