@@ -81,8 +81,69 @@ public class App {
                     totalTratores = cadastrarFrota(placa, capacidadeMaxima, totalTratores, tratores);
                     break;
 
-                case 4:
-                    
+                case 4:       
+                    System.out.println("\n----> Registro de Entrada de Café <----");
+
+                    System.out.print("Matrícula do Funcionário: ");
+                    int mat = sc.nextInt();
+                    sc.nextLine();
+
+                    boolean funcExiste = false;
+
+                    for (int i = 0; i < totalFuncionarios; i++) {
+                        if (funcionarios[i].matricula == mat) {
+                            funcExiste = true;
+                            break;
+                        }
+                    }
+                    if (!funcExiste) {
+                        System.out.println("ERRO: Funcionário não cadastrado!");
+                        break;
+                    }
+                    System.out.print("Nome do Talhão: ");
+                    String nomeT = sc.nextLine();
+                    boolean talhaoExiste = false;
+
+                    for (int i = 0; i < totalTalhoes; i++) {
+                        if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
+                            talhaoExiste = true;
+                            break;
+                        }
+                    }
+                    if (!talhaoExiste) {
+                        System.out.println("ERRO: Talhão não encontrado!");
+                        break;
+                    }
+                    System.out.print("Placa do Trator(Formato AAA-0000):");
+                    String placaT = sc.nextLine();
+                    int indexTrator = -1;
+
+                    for (int i = 0; i < totalTratores; i++) {
+                        if (tratores[i].placa.equalsIgnoreCase(placaT)) {
+                            indexTrator = i;
+                            break;
+                        }
+                    }
+                    if (indexTrator == -1) {
+                        System.out.println("ERRO: Trator não existe!");
+                        break;
+                    }
+                    System.out.print("Quantidade de Litros: ");
+                    double litros = sc.nextDouble();
+                    sc.nextLine();
+
+                    if (litros > tratores[indexTrator].capacidadeMaxima) {
+                        System.out.println("ERRO: Carga maior que a capacidade do trator!");
+                        break;
+                    }
+
+                    System.out.print("Data (dd/mm): ");
+                    String data = sc.nextLine();
+
+                    System.out.print("Destino (Terreiro/Secador): ");
+                    String destino = sc.nextLine();
+
+                    totalRegistros = cadastrarRegistrosCafe(mat, nomeT, placaT, litros, data, destino, totalRegistros, registros);
                     break;
 
                 case 5:
@@ -216,73 +277,17 @@ public class App {
                     return totalTratores;
     }
 
-    public static void cadastrarRegistrosCafe(){
-        System.out.println("\n----> Registro de Entrada de Café <----");
+    public static int cadastrarRegistrosCafe(int mat, String nomeT, String placaT, double litros, String data, String destino, int totalRegistros, RegistroCafe[] registros){
                     RegistroCafe novoRegistro = new RegistroCafe();
 
-                    System.out.print("Matrícula do Funcionário: ");
-                    int mat = sc.nextInt();
-                    sc.nextLine();
-
-                    boolean funcExiste = false;
-
-                    for (int i = 0; i < totalFuncionarios; i++) {
-                        if (funcionarios[i].matricula == mat) {
-                            funcExiste = true;
-                            break;
-                        }
-                    }
-                    if (!funcExiste) {
-                        System.out.println("ERRO: Funcionário não cadastrado!");
-                        break;
-                    }
-                    System.out.print("Nome do Talhão: ");
-                    String nomeT = sc.nextLine();
-                    boolean talhaoExiste = false;
-
-                    for (int i = 0; i < totalTalhoes; i++) {
-                        if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
-                            talhaoExiste = true;
-                            break;
-                        }
-                    }
-                    if (!talhaoExiste) {
-                        System.out.println("ERRO: Talhão não encontrado!");
-                        break;
-                    }
-                    System.out.print("Placa do Trator: ");
-                    String placaT = sc.nextLine();
-                    int indexTrator = -1;
-
-                    for (int i = 0; i < totalTratores; i++) {
-                        if (tratores[i].placa.equalsIgnoreCase(placaT)) {
-                            indexTrator = i;
-                            break;
-                        }
-                    }
-                    if (indexTrator == -1) {
-                        System.out.println("ERRO: Trator não existe!");
-                        break;
-                    }
-                    System.out.print("Quantidade de Litros: ");
-                    double litros = sc.nextDouble();
-                    sc.nextLine();
-
-                    if (litros > tratores[indexTrator].capacidadeMaxima) {
-                        System.out.println("ERRO: Carga maior que a capacidade do trator!");
-                        break;
-                    }
-
-                    System.out.print("Data (dd/mm): ");
-                    novoRegistro.data = sc.nextLine();
-
-                    System.out.print("Destino (Terreiro/Secador): ");
-                    novoRegistro.destino = sc.nextLine();
+                    
 
                     novoRegistro.matriculaFuncionario = mat;
                     novoRegistro.nomeTalhao = nomeT;
                     novoRegistro.placaTrator = placaT;
                     novoRegistro.quantidadeLitros = litros;
+                    novoRegistro.data = data;
+                    novoRegistro.destino = destino;
 
                     registros[totalRegistros] = novoRegistro;
                     totalRegistros++;
@@ -303,6 +308,8 @@ public class App {
                     } catch (IOException err) {
                         System.out.println("Erro ao salvar: " + err.getMessage());
                     }
+
+                    return totalRegistros;
     }
 
     //FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
