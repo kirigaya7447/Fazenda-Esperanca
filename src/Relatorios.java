@@ -24,7 +24,7 @@ public class Relatorios {
     private static String retornaDataeHora(){
         LocalDateTime horaAtual = LocalDateTime.now();
 
-        DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH:mm:ss");
+        DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH-mm-ss");
 
         String data = horaAtual.format(formataData);
         return data;
