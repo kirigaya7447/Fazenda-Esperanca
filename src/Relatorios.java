@@ -1,5 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Relatorios {
 
@@ -15,6 +19,15 @@ public class Relatorios {
 
 
         System.out.println("Relatório extraído em: " + data + " às " + hora);
+    }
+
+    private static String retornaDataeHora(){
+        LocalDateTime horaAtual = LocalDateTime.now();
+
+        DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH:mm:ss");
+
+        String data = horaAtual.format(formataData);
+        return data;
     }
 
     //Relatório 1 - Acerto da Quinzena
@@ -41,6 +54,29 @@ public class Relatorios {
                     totalLitros += registros[j].quantidadeLitros;
                 }
             }
+
+            //gera um arquivo com o relatório mostrado na tela
+            try {
+                        File arquivo = new File("src/Relatorios/Quinzena/" + retornaDataeHora() + ".txt");
+                        if(arquivo.createNewFile()){
+                            PrintWriter gravador = new PrintWriter(arquivo);
+
+                            for (int k = 0; k < totalFuncionarios; k++) {
+                                // converte o objeto para o formato CSV
+                                String linha = "Funcionário: " + funcionarios[i].nome +
+                                                "\nMatrícula: " + funcionarios[i].matricula +
+                                                "\nTotal Colhido: " + totalLitros + " litros"; 
+                                
+                                    gravador.println(linha);
+
+                        }
+                        System.out.println("Relatório gerado e disponível em Relatorios/Quinzena/");
+                        gravador.close();
+                        }
+                        
+                    } catch (Exception e) {
+                        System.out.println("Erro ao salvar: " + e.getMessage());
+                    }
 
             //mostra resultado do funcionário
             mostrarDataEHora();
