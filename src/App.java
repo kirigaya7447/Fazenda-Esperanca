@@ -15,7 +15,6 @@ public class App {
         CadastroFrota[] tratores = new CadastroFrota[100];
         RegistroCafe[] registros = new RegistroCafe[100];
 
-        
         int totalFuncionarios = carregarFuncionarios(funcionarios);
         int totalTalhoes = carregarTalhao(talhoes);
         int totalTratores = carregarFrota(tratores);
@@ -43,14 +42,32 @@ public class App {
                     int matricula = sc.nextInt();
                     sc.nextLine();
 
+                    boolean funcionarioExiste = false;
+
+                    for (int i = 0; i < totalFuncionarios; i++) {
+
+                        if (funcionarios[i].matricula == matricula) {
+                            funcionarioExiste = true;
+                            break;
+                        }
+
+                    }
+
+                    if (funcionarioExiste) {
+
+                        System.out.println("ERRO: Funcionário já cadastrado!");
+                        break;
+
+                    }
+
                     System.out.println("Digite o nome do funcionário:");
                     String nomeFuncionario = sc.nextLine();
-
 
                     System.out.println("Digite o tipo de contrato do funcionário(Diarista ou Fixo):");
                     String tipoContrato = sc.nextLine();
 
-                    totalFuncionarios =  cadastrarFuncionario(matricula, nomeFuncionario, tipoContrato, totalFuncionarios, funcionarios);
+                    totalFuncionarios = cadastrarFuncionario(matricula, nomeFuncionario, tipoContrato,
+                            totalFuncionarios, funcionarios);
                     break;
 
                 case 2:
@@ -59,15 +76,44 @@ public class App {
                     int codigoTalhao = sc.nextInt();
                     sc.nextLine();
 
+                    boolean talhaoExiste = false;
+
+                    for (int i = 0; i < totalTalhoes; i++) {
+
+                        if (talhoes[i].codigo == codigoTalhao) {
+                            talhaoExiste = true;
+                            break;
+                        }
+                    }
+
+                    if (talhaoExiste) {
+                        System.out.println("ERRO: Código de talhão já cadastrado!");
+                        break;
+                    }
+
                     System.out.println("Digite o nome da área:");
                     String nomeTalhao = sc.nextLine();
+
+                    for (int i = 0; i < totalTalhoes; i++) {
+
+                        if (talhoes[i].nome.equalsIgnoreCase(nomeTalhao)) {
+                            talhaoExiste = true;
+                            break;
+                        }
+                    }
+
+                    if (talhaoExiste) {
+                        System.out.println("ERRO: Nome de talhão já cadastrado!");
+                        break;
+                    }
 
                     System.out.println("Digite a variedade do café:");
                     String variedade = sc.nextLine();
 
                     System.out.println("Digite a estimativa de produção:");
                     double estimativa = sc.nextDouble();
-                    totalTalhoes = cadastrarTalhao(codigoTalhao, nomeTalhao, variedade, estimativa, totalTalhoes, talhoes);
+                    totalTalhoes = cadastrarTalhao(codigoTalhao, nomeTalhao, variedade, estimativa, totalTalhoes,
+                            talhoes);
                     break;
 
                 case 3:
@@ -75,13 +121,27 @@ public class App {
                     System.out.println("Digite a placa do trator(Formato AAA-0000):");
                     String placa = sc.nextLine();
 
+                    boolean tratorExiste = false;
+
+                    for (int i = 0; i < totalTratores; i++) {
+                        if (tratores[i].placa.equalsIgnoreCase(placa)) {
+                            tratorExiste = true;
+                            break;
+                        }
+                    }
+
+                    if (tratorExiste) {
+                        System.out.println("ERRO: Trator já cadastrado!");
+                        break;
+                    }
+
                     System.out.println("Digite a capacidade máxima:");
                     Double capacidadeMaxima = sc.nextDouble();
 
                     totalTratores = cadastrarFrota(placa, capacidadeMaxima, totalTratores, tratores);
                     break;
 
-                case 4:       
+                case 4:
                     System.out.println("\n----> Registro de Entrada de Café <----");
 
                     System.out.print("Matrícula do Funcionário: ");
@@ -102,7 +162,7 @@ public class App {
                     }
                     System.out.print("Nome do Talhão: ");
                     String nomeT = sc.nextLine();
-                    boolean talhaoExiste = false;
+                    talhaoExiste = false;
 
                     for (int i = 0; i < totalTalhoes; i++) {
                         if (talhoes[i].nome.equalsIgnoreCase(nomeT)) {
@@ -143,19 +203,20 @@ public class App {
                     System.out.print("Destino (Terreiro/Secador): ");
                     String destino = sc.nextLine();
 
-                    totalRegistros = cadastrarRegistrosCafe(mat, nomeT, placaT, litros, data, destino, totalRegistros, registros);
+                    totalRegistros = cadastrarRegistrosCafe(mat, nomeT, placaT, litros, data, destino, totalRegistros,
+                            registros);
                     break;
 
                 case 5:
-                    Relatorios.relatorioQuinzena(funcionarios,totalFuncionarios,registros,totalRegistros);
+                    Relatorios.relatorioQuinzena(funcionarios, totalFuncionarios, registros, totalRegistros);
                     break;
 
                 case 6:
-                     Relatorios.relatorioTalhao(talhoes,totalTalhoes,registros,totalRegistros);
-                     break;
+                    Relatorios.relatorioTalhao(talhoes, totalTalhoes, registros, totalRegistros);
+                    break;
 
                 case 7:
-                    Relatorios.relatorioSecagem(registros,totalRegistros);
+                    Relatorios.relatorioSecagem(registros, totalRegistros);
                     break;
 
                 case 0:
@@ -168,153 +229,155 @@ public class App {
         } while (opcao != 0);
     }
 
-    //FUNÇÕES DOS CADASTROS
+    // FUNÇÕES DOS CADASTROS
 
-    public static int cadastrarFuncionario(int matricula, String nome, String tipoContrato, int totalFuncionarios, CadastroFuncionario[] funcionarios){
-                    funcionarios[totalFuncionarios] = new CadastroFuncionario();
-                    
-                    funcionarios[totalFuncionarios].matricula = matricula;
-                    funcionarios[totalFuncionarios].nome = nome;
-                    funcionarios[totalFuncionarios].tipoContrato = tipoContrato;
+    public static int cadastrarFuncionario(int matricula, String nome, String tipoContrato, int totalFuncionarios,
+            CadastroFuncionario[] funcionarios) {
+        funcionarios[totalFuncionarios] = new CadastroFuncionario();
 
-                    System.out.println("Cadastro efetuado com sucesso!");
-                    totalFuncionarios++;
+        funcionarios[totalFuncionarios].matricula = matricula;
+        funcionarios[totalFuncionarios].nome = nome;
+        funcionarios[totalFuncionarios].tipoContrato = tipoContrato;
 
-                    try {
-                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Funcionarios.csv");
-                        PrintWriter gravador = new PrintWriter(arquivo);
+        System.out.println("Cadastro efetuado com sucesso!");
+        totalFuncionarios++;
 
-                        for (int i = 0; i < totalFuncionarios; i++) {
-                            // converte o objeto para o formato CSV
-                            String linha = funcionarios[i].matricula + ";" +
-                            funcionarios[i].nome + ";" +
-                                    funcionarios[i].tipoContrato;
-                            gravador.println(linha);
-                            System.out.println("Sistema atualizado com sucesso!");
+        try {
+            FileWriter arquivo = new FileWriter("src/BancoDeDados/Funcionarios.csv");
+            PrintWriter gravador = new PrintWriter(arquivo);
 
-                        }
-                        gravador.close();
-                    } catch (Exception e) {
-                        System.out.println("Erro ao salvar: " + e.getMessage());
-                    }
+            for (int i = 0; i < totalFuncionarios; i++) {
+                // converte o objeto para o formato CSV
+                String linha = funcionarios[i].matricula + ";" +
+                        funcionarios[i].nome + ";" +
+                        funcionarios[i].tipoContrato;
+                gravador.println(linha);
+                System.out.println("Sistema atualizado com sucesso!");
 
-                    return totalFuncionarios;
+            }
+            gravador.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar: " + e.getMessage());
+        }
+
+        return totalFuncionarios;
     }
 
-    public static int cadastrarTalhao(int codigo, String nome, String variedade, double estimativa, int totalTalhoes, CadastroTalhao[] talhoes){
-            talhoes[totalTalhoes] = new CadastroTalhao();
+    public static int cadastrarTalhao(int codigo, String nome, String variedade, double estimativa, int totalTalhoes,
+            CadastroTalhao[] talhoes) {
+        talhoes[totalTalhoes] = new CadastroTalhao();
 
-                    talhoes[totalTalhoes].codigo = codigo;
-                    talhoes[totalTalhoes].nome = nome;
-                    talhoes[totalTalhoes].variedadeCafe = variedade;
-                    talhoes[totalTalhoes].estimativaProducao = estimativa;
+        talhoes[totalTalhoes].codigo = codigo;
+        talhoes[totalTalhoes].nome = nome;
+        talhoes[totalTalhoes].variedadeCafe = variedade;
+        talhoes[totalTalhoes].estimativaProducao = estimativa;
 
-                    System.out.println("Cadastro efetuado com sucesso!");
-                    totalTalhoes++;
+        System.out.println("Cadastro efetuado com sucesso!");
+        totalTalhoes++;
 
-                    //salvando informações
-                    try {
+        // salvando informações
+        try {
 
-                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Talhoes.csv");
+            FileWriter arquivo = new FileWriter("src/BancoDeDados/Talhoes.csv");
 
-                        PrintWriter gravar = new PrintWriter(arquivo);
+            PrintWriter gravar = new PrintWriter(arquivo);
 
-                        for(int i = 0; i < totalTalhoes; i++) {
+            for (int i = 0; i < totalTalhoes; i++) {
 
-                            gravar.println( 
-                                talhoes[i].codigo + ";" +
+                gravar.println(
+                        talhoes[i].codigo + ";" +
                                 talhoes[i].nome + ";" +
                                 talhoes[i].variedadeCafe + ";" +
-                                talhoes[i].estimativaProducao
-                            );
+                                talhoes[i].estimativaProducao);
 
-                        }
+            }
 
-                        gravar.close();
-                        arquivo.close();
+            gravar.close();
+            arquivo.close();
 
-                    } catch(Exception erro) {
+        } catch (Exception erro) {
 
-                        System.out.println("Erro ao gravar arquivo");
+            System.out.println("Erro ao gravar arquivo");
 
-                    }
-                    return totalTalhoes;
+        }
+        return totalTalhoes;
 
     }
 
-    public static int cadastrarFrota(String placa, double capacidadeMaxima, int totalTratores, CadastroFrota[] tratores){
-            tratores[totalTratores] = new CadastroFrota();
+    public static int cadastrarFrota(String placa, double capacidadeMaxima, int totalTratores,
+            CadastroFrota[] tratores) {
+        tratores[totalTratores] = new CadastroFrota();
 
-                    tratores[totalTratores].placa = placa;
+        tratores[totalTratores].placa = placa;
 
-                    tratores[totalTratores].capacidadeMaxima = capacidadeMaxima;
+        tratores[totalTratores].capacidadeMaxima = capacidadeMaxima;
 
-                   System.out.println("Cadastro efetuado com sucesso!");
-                   totalTratores++;
+        System.out.println("Cadastro efetuado com sucesso!");
+        totalTratores++;
 
-                   try {
-                        FileWriter arquivo = new FileWriter("src/BancoDeDados/Frota.csv");
-                        PrintWriter gravador = new PrintWriter(arquivo);
+        try {
+            FileWriter arquivo = new FileWriter("src/BancoDeDados/Frota.csv");
+            PrintWriter gravador = new PrintWriter(arquivo);
 
-                        for (int i = 0; i < totalTratores; i++) {
-                            // converte o objeto para o formato CSV
-                            String linha = tratores[i].placa + ";" +
-                            tratores[i].capacidadeMaxima;
-                            gravador.println(linha);
-                            System.out.println("Sistema atualizado com sucesso!");
+            for (int i = 0; i < totalTratores; i++) {
+                // converte o objeto para o formato CSV
+                String linha = tratores[i].placa + ";" +
+                        tratores[i].capacidadeMaxima;
+                gravador.println(linha);
+                System.out.println("Sistema atualizado com sucesso!");
 
-                        }
-                        gravador.close();
-                    } catch (Exception e) {
-                        System.out.println("Erro ao salvar: " + e.getMessage());
-                    }
-                    return totalTratores;
+            }
+            gravador.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar: " + e.getMessage());
+        }
+        return totalTratores;
     }
 
-    public static int cadastrarRegistrosCafe(int mat, String nomeT, String placaT, double litros, String data, String destino, int totalRegistros, RegistroCafe[] registros){
-                    RegistroCafe novoRegistro = new RegistroCafe();
+    public static int cadastrarRegistrosCafe(int mat, String nomeT, String placaT, double litros, String data,
+            String destino, int totalRegistros, RegistroCafe[] registros) {
+        RegistroCafe novoRegistro = new RegistroCafe();
 
-                    novoRegistro.matriculaFuncionario = mat;
-                    novoRegistro.nomeTalhao = nomeT;
-                    novoRegistro.placaTrator = placaT;
-                    novoRegistro.quantidadeLitros = litros;
-                    novoRegistro.data = data;
-                    novoRegistro.destino = destino;
+        novoRegistro.matriculaFuncionario = mat;
+        novoRegistro.nomeTalhao = nomeT;
+        novoRegistro.placaTrator = placaT;
+        novoRegistro.quantidadeLitros = litros;
+        novoRegistro.data = data;
+        novoRegistro.destino = destino;
 
-                    registros[totalRegistros] = novoRegistro;
-                    totalRegistros++;
-                    System.out.println("Lançamento realizado com sucesso!");
-                    try {
-                        FileWriter arquivo = new FileWriter("src/BancoDeDados/RegistrosCafe.csv");
-                        PrintWriter gravador = new PrintWriter(arquivo);
+        registros[totalRegistros] = novoRegistro;
+        totalRegistros++;
+        System.out.println("Lançamento realizado com sucesso!");
+        try {
+            FileWriter arquivo = new FileWriter("src/BancoDeDados/RegistrosCafe.csv");
+            PrintWriter gravador = new PrintWriter(arquivo);
 
-                        for (int cont = 0; cont < totalRegistros; cont++) {
-                            String linha = registros[cont].matriculaFuncionario + ";" +
-                                    registros[cont].nomeTalhao + ";" +
-                                    registros[cont].placaTrator + ";" +
-                                    registros[cont].quantidadeLitros + ";" +
-                                    registros[cont].data + ";" +
-                                    registros[cont].destino;
-                            gravador.println(linha);
-                            System.out.println("Sistema atualizado com sucesso!");
-                        }
-                        gravador.close();
-                    } catch (IOException err) {
-                        System.out.println("Erro ao salvar: " + err.getMessage());
-                    }
+            for (int cont = 0; cont < totalRegistros; cont++) {
+                String linha = registros[cont].matriculaFuncionario + ";" +
+                        registros[cont].nomeTalhao + ";" +
+                        registros[cont].placaTrator + ";" +
+                        registros[cont].quantidadeLitros + ";" +
+                        registros[cont].data + ";" +
+                        registros[cont].destino;
+                gravador.println(linha);
+                System.out.println("Sistema atualizado com sucesso!");
+            }
+            gravador.close();
+        } catch (IOException err) {
+            System.out.println("Erro ao salvar: " + err.getMessage());
+        }
 
-                    return totalRegistros;
+        return totalRegistros;
     }
 
-    //FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
+    // FUNÇÕES DE CARREGAMENTOS DOS ARQUIVOS SALVOS
 
     public static int carregarFuncionarios(CadastroFuncionario[] funcionarios) {
         int a = 0;
 
         try {
             Scanner leituraArquivo = new Scanner(new File("src/BancoDeDados/Funcionarios.csv"));
-                                                                                                 
-                                                                                                 
+
             while (leituraArquivo.hasNextLine() && a < funcionarios.length) {
                 String linha = leituraArquivo.nextLine();
                 String[] separador = linha.split(";");
