@@ -252,9 +252,10 @@ public class App {
                         funcionarios[i].nome + ";" +
                         funcionarios[i].tipoContrato;
                 gravador.println(linha);
-                System.out.println("Sistema atualizado com sucesso!");
 
             }
+                System.out.println("Sistema atualizado com sucesso!");
+                arquivo.close();
             gravador.close();
         } catch (Exception e) {
             System.out.println("Erro ao salvar: " + e.getMessage());
@@ -291,9 +292,9 @@ public class App {
                                 talhoes[i].estimativaProducao);
 
             }
-
+                System.out.println("Sistema atualizado com sucesso!");
+                arquivo.close();
             gravar.close();
-            arquivo.close();
 
         } catch (Exception erro) {
 
@@ -324,9 +325,10 @@ public class App {
                 String linha = tratores[i].placa + ";" +
                         tratores[i].capacidadeMaxima;
                 gravador.println(linha);
-                System.out.println("Sistema atualizado com sucesso!");
 
             }
+                System.out.println("Sistema atualizado com sucesso!");
+                arquivo.close();
             gravador.close();
         } catch (Exception e) {
             System.out.println("Erro ao salvar: " + e.getMessage());
@@ -360,8 +362,9 @@ public class App {
                         registros[cont].data + ";" +
                         registros[cont].destino;
                 gravador.println(linha);
-                System.out.println("Sistema atualizado com sucesso!");
             }
+                System.out.println("Sistema atualizado com sucesso!");
+                arquivo.close();
             gravador.close();
         } catch (IOException err) {
             System.out.println("Erro ao salvar: " + err.getMessage());
