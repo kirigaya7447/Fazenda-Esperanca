@@ -86,55 +86,93 @@ public class Relatorios {
             System.out.println("-----------------------------------");
         }
     }
-    
+
     //Relatório 2- Talhão
     public static void relatorioTalhao(
-        CadastroTalhao[] talhoes,
-        int totalTalhoes,
-        RegistroCafe[] registros,
-        int totalRegistros
-    ) {
+            CadastroTalhao[] talhoes,
+            int totalTalhoes,
+            RegistroCafe[] registros,
+            int totalRegistros) {
 
         System.out.println("---- RELATÓRIO DE TALHÕES ----");
 
         for(int i = 0; i < totalTalhoes; i++) {
 
-            double totalProduzido = 0;
+        double totalProduzido = 0;
+        for(int j = 0; j < totalRegistros; j++) {
 
-            for(int j = 0; j < totalRegistros; j++) {
+            if(registros[j].nomeTalhao.equalsIgnoreCase(talhoes[i].nome)) {
 
-                if(registros[j].nomeTalhao.equalsIgnoreCase(talhoes[i].nome)) {
-
-                    totalProduzido = totalProduzido + registros[j].quantidadeLitros;
-
-                }
-
-            }
-
-            System.out.println();
-            mostrarDataEHora();
-
-            System.out.println("Talhão: " + talhoes[i].nome);
-
-            System.out.println("Código: " + talhoes[i].codigo);
-
-            System.out.println("Produção atual: " + totalProduzido + " litros");
-
-            System.out.println("Estimativa inicial: " + talhoes[i].estimativaProducao + " litros");
-
-            if(totalProduzido >= talhoes[i].estimativaProducao) {
-
-                System.out.println("Estimativa atingida!");
-
-            } else {
-
-                System.out.println("Estimativa ainda não atingida.");
+                totalProduzido = totalProduzido + registros[j].quantidadeLitros;
 
             }
 
         }
 
+            //gera um arquivo com o relatório mostrado na tela
+            try {
+
+            File arquivo = new File("src/Relatorios/Talhao/" + retornaDataeHora() + ".txt");
+
+            if(arquivo.createNewFile()){
+
+                PrintWriter gravador = new PrintWriter(arquivo);
+
+                for (int k = 0; k < totalTalhoes; k++) {
+
+                    String linha = "Talhão: " + talhoes[i].nome +
+                                    "\nCódigo: " + talhoes[i].codigo +
+                                    "\nProdução atual: " + totalProduzido + " litros" +
+                                    "\nEstimativa inicial: " + talhoes[i].estimativaProducao + " litros";
+
+                    if(totalProduzido >= talhoes[i].estimativaProducao) {
+
+                        linha += "\nEstimativa atingida!";
+
+                    } else {
+
+                        linha += "\nEstimativa ainda não atingida.";
+
+                    }
+
+                    gravador.println(linha);
+
+                }
+
+                System.out.println("Relatório gerado e disponível em Relatorios/Talhoes/");
+                gravador.close();
+
+            }
+
+                } catch (Exception e) {
+
+                System.out.println("Erro ao salvar: " + e.getMessage());
+
+                }
+
+        System.out.println();
+        mostrarDataEHora();
+
+        System.out.println("Talhão: " + talhoes[i].nome);
+        System.out.println("Código: " + talhoes[i].codigo);
+        System.out.println("Produção atual: " + totalProduzido + " litros");
+        System.out.println("Estimativa inicial: " + talhoes[i].estimativaProducao + " litros");
+
+        if(totalProduzido >= talhoes[i].estimativaProducao) {
+
+            System.out.println("Estimativa atingida!");
+
+        } else {
+
+            System.out.println("Estimativa ainda não atingida.");
+
+        }
+
+        System.out.println("-----------------------------------");
+
     }
+
+}
     //Relatório 3 - Secagem
     public static void relatorioSecagem(
            RegistroCafe[] registros,
@@ -143,10 +181,10 @@ public class Relatorios {
            double totalSecador = 0;
            double totalTerreiro = 0;
 
-           System.out.println("\n----> RELATÓRIO DE SECAGEM <----");
+        System.out.println("\n----> RELATÓRIO DE SECAGEM <----");
 
-           //percorre todos os registros
-           for (int i = 0; i < totalRegistros; i++) {
+        //percorre todos os registros
+        for (int i = 0; i < totalRegistros; i++) {
 
            //verifica o destino
            if (registros[i].destino.equalsIgnoreCase("Secador")) {
@@ -158,7 +196,32 @@ public class Relatorios {
            totalTerreiro += registros[i].quantidadeLitros;
            }
         }
+        //gera um arquivo com o relatório mostrado na tela
+        try {
 
+            File arquivo = new File("src/Relatorios/Secagem/" + retornaDataeHora() + ".txt");
+
+            if(arquivo.createNewFile()){
+
+                PrintWriter gravador = new PrintWriter(arquivo);
+
+                String linha = "Total enviado para o Secador: " + totalSecador + " litros" +
+                                "\nTotal enviado para o Terreiro: " + totalTerreiro + " litros";
+
+                gravador.println(linha);
+
+                System.out.println("Relatório gerado e disponível em Relatorios/Secagem/");
+
+                gravador.close();
+
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao salvar: " + e.getMessage());
+
+        }
+    
         //exibe os resultados
         mostrarDataEHora();
         System.out.println("Total enviado para o Secador: " + totalSecador + " litros");

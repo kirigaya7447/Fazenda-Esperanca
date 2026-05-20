@@ -21,7 +21,7 @@ public class App {
         int totalRegistros = carregartalhoesCafe(registros);
 
         do {
-            System.out.println("----> SISTEMA FAZENDA <----");
+            System.out.println("\n----> SISTEMA FAZENDA <----");
             System.out.println("1 - Cadastrar Funcionário");
             System.out.println("2 - Cadastrar Talhão");
             System.out.println("3 - Cadastrar Trator");
