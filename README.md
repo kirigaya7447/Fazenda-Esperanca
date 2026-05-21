@@ -2,7 +2,7 @@
 
 ## Comandos e resultados de apoio que solicitamos para a I.A. ChatGPT no desenvolvimento do escopo e andamento deste projeto:
 
-### Observação: Toda vez que iniciamos uma linha de raciocínio com a IA informada, delimitávamos que ela não poderia exceder os conteúdos que estudamos, afim de não termos ciência de algo muito específico que ela pudesse realizar
+### Observação: Toda vez que iniciamos uma linha de raciocínio com a IA informada, delimitávamos que ela não poderia exceder os conteúdos que estudamos, a fim de não termos ciência de algo muito específico que ela pudesse realizar
 
 ### Ana Paula:
 Faça a classe colaborador;
