@@ -20,9 +20,13 @@ Antes de dar o comando, foi enviado ao chat o arquivo da aula 15 - persistência
 **Comando 05:** Desenvolva o código para o relatório do talhão, lembrando que se possível, o código deve ser uma função que estará em um módulo chamado relatórios e será chamado na main. Não fuja as regras do primeiro documento que mandei;
 
 ### Giulia Guimarães:
-**Comando 01:** Monte o registro do café (RegistroCafe) com as especificações do documento para esta função e o chame na main (arquivo "App.java"), deve incluir a busca pela placa informada pelo usuário, se existe ou não e se a capacidade não foi excedida. Faça a divisão do sistema em módulos.
+**Comando 01:** Tomando como apoio o seguinte projeto e suas especificações, elabore o código em java seguindo a lógica da separação em módulos. O código não precisa ser tão complexo.
 
-**Resultado:**
+**Comando 02:** Monte o arquivo (RegistroCafe) para guardar o registro da colheita com as especificações do documento para esta função e o chame na main (arquivo "App.java"), deve incluir a busca pela placa informada pelo usuário, se existe ou não e se a capacidade não foi excedida.
+
+Ao passo que os comandos eram enviados, algumas partes do código já montadas também eram enviadas como referência para a Inteligência Artificial, junto das especificações contidas no documento do trabalho.
+
+**Comando 03:** A partir do documento em anexo e códigos já feitos, monte o relatório da "Quinzena" dentro do arquivo Relatorios em um código simplificado. Também precisa ser chamada pela main. Depois, outro relatório para "Secagem" e mais um para "Talhao", os dados deverão ser salvos em formato "txt", salvo em Relatorios.
 
 ### João Henrique:
 **Comando 01:** Seguinte chat, estou com esta estrutura de arquivos da imagem e precisava registrar as alterações do codigo ao lado no arquivo RegistrosCafe.csv, como ficaria o pathname para ele?
