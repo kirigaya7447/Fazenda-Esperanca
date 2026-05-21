@@ -1,0 +1,36 @@
+Talhão: area1
+Código: 1234
+Produção atual: 0.0 litros
+Estimativa inicial: 1500.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Talhão: 9
+Código: 9
+Produção atual: 0.0 litros
+Estimativa inicial: 9.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Talhão: CARL�O
+Código: 909
+Produção atual: 4500.0 litros
+Estimativa inicial: 9000.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Talhão: area
+Código: 123
+Produção atual: 0.0 litros
+Estimativa inicial: 600.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Talhão: frota
+Código: 321
+Produção atual: 600.0 litros
+Estimativa inicial: 600.0 litros
+-----------------------------------
+Estimativa atingida!
+Talhão: reservada
+Código: 987
+Produção atual: 400.0 litros
+Estimativa inicial: 400.0 litros
+-----------------------------------
+Estimativa atingida!

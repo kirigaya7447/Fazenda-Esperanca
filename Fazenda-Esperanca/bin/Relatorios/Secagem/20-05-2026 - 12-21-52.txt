@@ -1,0 +1,3 @@
+Total enviado para o Secador: 1000.0 litros
+Total enviado para o Terreiro: 400.0 litros
+-----------------------------------
