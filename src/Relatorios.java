@@ -1,14 +1,12 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class Relatorios {
 
     // Registra a hora e a data do relatório
-    private static void mostrarDataEHora() {
+    private static String mostrarDataEHora() {
         LocalDateTime horaAtual = LocalDateTime.now();
 
         DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -17,7 +15,7 @@ public class Relatorios {
         String data = horaAtual.format(formataData);
         String hora = horaAtual.format(formataHora);
 
-        System.out.println("Relatório extraído em: " + data + " às " + hora);
+        return "Relatório extraído em: " + data + " às " + hora;
     }
 
     private static String retornaDataeHora() {
@@ -37,6 +35,8 @@ public class Relatorios {
             int totalRegistros) {
 
         System.out.println("\n----> RELATÓRIO DA QUINZENA <----");
+        // exibe os resultados
+        System.out.println(mostrarDataEHora());
 
         // gera um arquivo com o relatório mostrado na tela
         try {
@@ -60,14 +60,14 @@ public class Relatorios {
                     }
 
                     // mostra resultado do funcionário
-                    mostrarDataEHora();
                     System.out.println("Funcionário: " + funcionarios[i].nome);
                     System.out.println("Matrícula: " + funcionarios[i].matricula);
                     System.out.println("Total Colhido: " + totalLitros + " litros");
                     System.out.println("-----------------------------------");
 
                     // converte o objeto para o formato CSV
-                    String linha = "Funcionário: " + funcionarios[i].nome +
+                    String linha = mostrarDataEHora() +
+                            "\nFuncionário: " + funcionarios[i].nome +
                             "\nMatrícula: " + funcionarios[i].matricula +
                             "\nTotal Colhido: " + totalLitros + " litros" +
                             "\n-----------------------------------";
@@ -92,6 +92,8 @@ public class Relatorios {
             int totalRegistros) {
 
         System.out.println("---- RELATÓRIO DE TALHÕES ----");
+        // exibe os resultados
+        System.out.println(mostrarDataEHora());
 
         // gera um arquivo com o relatório mostrado na tela
         try {
@@ -116,7 +118,6 @@ public class Relatorios {
                     }
 
                     System.out.println();
-                    mostrarDataEHora();
 
                     System.out.println("Talhão: " + talhoes[i].nome);
                     System.out.println("Código: " + talhoes[i].codigo);
@@ -135,7 +136,8 @@ public class Relatorios {
 
                     System.out.println("-----------------------------------");
 
-                    String linha = "Talhão: " + talhoes[i].nome +
+                    String linha = mostrarDataEHora() +
+                            "\nTalhão: " + talhoes[i].nome +
                             "\nCódigo: " + talhoes[i].codigo +
                             "\nProdução atual: " + totalProduzido + " litros" +
                             "\nEstimativa inicial: " + talhoes[i].estimativaProducao + " litros" +
@@ -177,6 +179,8 @@ public class Relatorios {
         double totalTerreiro = 0;
 
         System.out.println("\n----> RELATÓRIO DE SECAGEM <----");
+        // exibe os resultados
+        System.out.println(mostrarDataEHora());
         // gera um arquivo com o relatório mostrado na tela
         try {
 
@@ -186,29 +190,28 @@ public class Relatorios {
 
                 PrintWriter gravador = new PrintWriter(arquivo);
 
-        // percorre todos os registros
-        for (int i = 0; i < totalRegistros; i++) {
+                // percorre todos os registros
+                for (int i = 0; i < totalRegistros; i++) {
 
-            // verifica o destino
-            if (registros[i].destino.equalsIgnoreCase("Secador")) {
+                    // verifica o destino
+                    if (registros[i].destino.equalsIgnoreCase("Secador")) {
 
-                totalSecador += registros[i].quantidadeLitros;
+                        totalSecador += registros[i].quantidadeLitros;
 
-            } else if (registros[i].destino.equalsIgnoreCase("Terreiro")) {
+                    } else if (registros[i].destino.equalsIgnoreCase("Terreiro")) {
 
-                totalTerreiro += registros[i].quantidadeLitros;
-            }
-        }
+                        totalTerreiro += registros[i].quantidadeLitros;
+                    }
+                }
 
-        // exibe os resultados
-        mostrarDataEHora();
-        System.out.println("Total enviado para o Secador: " + totalSecador + " litros");
-        System.out.println("Total enviado para o Terreiro: " + totalTerreiro + " litros");
-        System.out.println("-----------------------------------");
+                System.out.println("Total enviado para o Secador: " + totalSecador + " litros");
+                System.out.println("Total enviado para o Terreiro: " + totalTerreiro + " litros");
+                System.out.println("-----------------------------------");
 
-    String linha = "Total enviado para o Secador: " + totalSecador + " litros" +
+                String linha = mostrarDataEHora() +
+                        "\nTotal enviado para o Secador: " + totalSecador + " litros" +
                         "\nTotal enviado para o Terreiro: " + totalTerreiro + " litros" +
-                            "\n-----------------------------------";
+                        "\n-----------------------------------";
 
                 gravador.println(linha);
 
@@ -223,7 +226,78 @@ public class Relatorios {
             System.out.println("Erro ao salvar: " + e.getMessage());
 
         }
+    }
 
-}
+    // Relatório 4 - Geral
+    public static void relatorioGeral(
+            CadastroFuncionario[] funcionarios,
+            int totalFuncionarios,
+            CadastroTalhao[] talhoes,
+            int totalTalhoes,
+            CadastroFrota[] tratores,
+            int totalTratores,
+            RegistroCafe[] registros,
+            int totalRegistros) {
 
+        double totalSecador = 0;
+        double totalTerreiro = 0;
+
+        System.out.println("\n----> RELATÓRIO GERAL <----");
+        // mostra na tela
+        System.out.println(mostrarDataEHora());
+        // percorre todos os registros
+        for (int i = 0; i < totalRegistros; i++) {
+
+            // verifica o destino
+            if (registros[i].destino.equalsIgnoreCase("Secador")) {
+
+                totalSecador += registros[i].quantidadeLitros;
+
+            } else if (registros[i].destino.equalsIgnoreCase("Terreiro")) {
+
+                totalTerreiro += registros[i].quantidadeLitros;
+            }
+        }
+
+        try {
+
+            File arquivo = new File("src/Relatorios/Geral/" + retornaDataeHora() + ".txt");
+
+            if (arquivo.createNewFile()) {
+
+                PrintWriter gravador = new PrintWriter(arquivo);
+
+                System.out.println("Quantidade de Funcionários: " + totalFuncionarios);
+                System.out.println("Quantidade de Talhões: " + totalTalhoes);
+                System.out.println("Quantidade de Tratores: " + totalTratores);
+                System.out.println("Total enviado para o Secador: " + totalSecador + " litros");
+                System.out.println("Total enviado para o Terreiro: " + totalTerreiro + " litros");
+                System.out.println("Total colhido: " + (totalSecador + totalTerreiro) + " litros");
+
+                System.out.println("-----------------------------------");
+
+                // escreve no arquivo
+                String linha = mostrarDataEHora() +
+                        "\nQuantidade de Funcionários: " + totalFuncionarios +
+                        "\nQuantidade de Talhões: " + totalTalhoes +
+                        "\nQuantidade de Tratores: " + totalTratores +
+                        "\nTotal enviado para o Terreiro: " + totalTerreiro + " litros" +
+                        "\nTotal enviado para o Secador: " + totalSecador + " litros" +
+                        "\nTotal de Café Colhido: " + (totalSecador + totalTerreiro) + " litros" +
+                        "\n-----------------------------------";
+
+                gravador.println(linha);
+
+                System.out.println("Relatório gerado e disponível em Relatorios/Geral/");
+
+                gravador.close();
+
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao salvar: " + e.getMessage());
+
+        }
+    }
 }

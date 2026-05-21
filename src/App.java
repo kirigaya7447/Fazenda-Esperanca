@@ -29,6 +29,7 @@ public class App {
             System.out.println("5 - Relatório Quinzena");
             System.out.println("6 - Relatório Talhão");
             System.out.println("7 - Relatório Secagem");
+            System.out.println("8 - Relatório Geral");
             System.out.println("0 - Sair");
             System.out.print("Escolha: ");
 
@@ -219,6 +220,9 @@ public class App {
                     Relatorios.relatorioSecagem(registros, totalRegistros);
                     break;
 
+                case 8: 
+                    Relatorios.relatorioGeral(funcionarios, totalFuncionarios, talhoes, totalTalhoes, tratores, totalTratores, registros, totalRegistros);
+                    break;
                 case 0:
                     System.out.println("Sistema encerrado.");
                     break;

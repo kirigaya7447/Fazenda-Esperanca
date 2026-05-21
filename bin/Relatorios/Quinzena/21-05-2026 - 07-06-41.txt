@@ -1,0 +1,36 @@
+Funcionário: 8
+Matrícula: 8
+Total Colhido: 8.0 litros
+-----------------------------------
+Funcionário: Pedro
+Matrícula: 5
+Total Colhido: 5.0 litros
+-----------------------------------
+Funcionário: Giulia
+Matrícula: 25
+Total Colhido: 0.0 litros
+-----------------------------------
+Funcionário: Jesus Cristo
+Matrícula: 27
+Total Colhido: 0.0 litros
+-----------------------------------
+Funcionário: Carlos POereira de Nobrega
+Matrícula: 801
+Total Colhido: 4500.0 litros
+-----------------------------------
+Funcionário: Maria
+Matrícula: 1111
+Total Colhido: 400.0 litros
+-----------------------------------
+Funcionário: maria
+Matrícula: 123
+Total Colhido: 0.0 litros
+-----------------------------------
+Funcionário: joao
+Matrícula: 456
+Total Colhido: 600.0 litros
+-----------------------------------
+Funcionário: jullia
+Matrícula: 987
+Total Colhido: 400.0 litros
+-----------------------------------

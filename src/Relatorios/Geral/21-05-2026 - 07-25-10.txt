@@ -1,0 +1,8 @@
+Relatório extraído em: 21/05/2026 às 07:25:10
+Quantidade de Funcionários: 8
+Quantidade de Talhões: 5
+Quantidade de Tratores: 4
+Total enviado para o Terreiro: 650.0 litros
+Total enviado para o Secador: 3100.0 litros
+Total de Café Colhido: 3750.0 litros
+-----------------------------------

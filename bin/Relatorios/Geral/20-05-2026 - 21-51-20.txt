@@ -1,0 +1,7 @@
+Quantidade de Funcionários: 9
+Quantidade de Talhões: 6
+Quantidade de Tratores: 4
+Total enviado para o Terreiro: 400.0 litros
+Total colhido: 1400.0 litros
+Total de Café Colhido: 1400.0 litros
+-----------------------------------

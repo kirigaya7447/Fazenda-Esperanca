@@ -1,0 +1,40 @@
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Pedro
+Matrícula: 5
+Total Colhido: 0.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Giulia
+Matrícula: 25
+Total Colhido: 250.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Jesus Cristo
+Matrícula: 27
+Total Colhido: 0.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Carlos Pereira de Nobrega
+Matrícula: 801
+Total Colhido: 1500.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Maria Eduarda
+Matrícula: 1111
+Total Colhido: 400.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Maria Vitória
+Matrícula: 123
+Total Colhido: 0.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Joao
+Matrícula: 456
+Total Colhido: 1200.0 litros
+-----------------------------------
+Relatório extraído em: 21/05/2026 às 07:25:07
+Funcionário: Jullia
+Matrícula: 987
+Total Colhido: 400.0 litros
+-----------------------------------

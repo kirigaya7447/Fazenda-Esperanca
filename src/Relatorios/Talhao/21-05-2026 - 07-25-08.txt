@@ -1,0 +1,35 @@
+Relatório extraído em: 21/05/2026 às 07:25:08
+Talhão: Cafezal Ana
+Código: 1234
+Produção atual: 1500.0 litros
+Estimativa inicial: 1500.0 litros
+-----------------------------------
+Estimativa atingida!
+Relatório extraído em: 21/05/2026 às 07:25:08
+Talhão: Cafezal Giulia
+Código: 909
+Produção atual: 400.0 litros
+Estimativa inicial: 9000.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Relatório extraído em: 21/05/2026 às 07:25:08
+Talhão: Cafezal Pedro
+Código: 123
+Produção atual: 600.0 litros
+Estimativa inicial: 600.0 litros
+-----------------------------------
+Estimativa atingida!
+Relatório extraído em: 21/05/2026 às 07:25:08
+Talhão: Boa esperança
+Código: 321
+Produção atual: 0.0 litros
+Estimativa inicial: 600.0 litros
+-----------------------------------
+Estimativa ainda não atingida.
+Relatório extraído em: 21/05/2026 às 07:25:08
+Talhão: Fazendao
+Código: 987
+Produção atual: 1000.0 litros
+Estimativa inicial: 400.0 litros
+-----------------------------------
+Estimativa atingida!
