@@ -20,7 +20,7 @@ Antes de dar o comando, foi enviado ao chat o arquivo da aula 15 - persistência
 **Comando 05:** Desenvolva o código para o relatório do talhão, lembrando que se possível, o código deve ser uma função que estará em um módulo chamado relatórios e será chamado na main. Não fuja as regras do primeiro documento que mandei;
 
 ### Giulia Guimarães:
-**Comando:**
+**Comando 01:** Monte o registro do café (RegistroCafe) com as especificações do documento para esta função e o chame na main (arquivo "App.java"), deve incluir a busca pela placa informada pelo usuário, se existe ou não e se a capacidade não foi excedida. Faça a divisão do sistema em módulos.
 
 **Resultado:**
 
@@ -63,7 +63,7 @@ O correto é:
     gravador.println(linha);
 
 ### Pedro Henrique:
-**Comando:** Faça um sistema de colheita em java, separando-os em arquivos, que serão:  funcionário, talhão e trator. Na main, deverá ter cadastro do funcionário, do tallhão e do trator. Deverá registrar a entrada de café com sua quantidade. Por fim, deve mostrar os relatório de cada arquivo e uma opçao para sair. O código não deverá ser usado com comandos muito elaborados, visto que será pego de inspiração por estudantes de java.
+**Comando:** Faça um sistema de colheita em java, separando-os em arquivos, que serão:  funcionário, talhão e trator. Na main, deverá ter cadastro do funcionário, do talhão e do trator. Deverá registrar a entrada de café com sua quantidade. Por fim, deve mostrar os relatório de cada arquivo e uma opçao para sair. O código não deverá ser usado com comandos muito elaborados, visto que será pego de inspiração por estudantes de java.
 
 **Resultado:** O resultado deste comando pode ser encontrado no arquivo **"Fazenda-Esperanca\Arquivos IA\Codigo_Base.java"**
 
